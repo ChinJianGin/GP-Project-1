@@ -1,4 +1,4 @@
-/****************************************************************************
+ï»¿/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -22,36 +22,50 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __SCENE_101_H__
-#define __SCENE_101_H__
+#ifndef __SCENE_COCOS_H__
+#define __SCENE_COCOS_H__
 
 #include "cocos2d.h"
-class Scene101 : public cocos2d::Scene
+#include "ui/CocosGUI.h"  // For Cocos Studio æ§åˆ¶é …å…ƒä»¶
+
+class SceneCocos : public cocos2d::Scene
 {
 private:
-    cocos2d::Sprite* btn_cuber; // ³õ´º¤¤·|©ñ¸mªº«ö¶s
+    cocos2d::Sprite* btn_cuber; // å ´æ™¯ä¸­æœƒæ”¾ç½®çš„æŒ‰éˆ•
     cocos2d::Sprite* btn_replay;
     cocos2d::Sprite* btn_return;
     cocos2d::Rect    cuber_rect;
     cocos2d::Rect    replay_rect;
-    cocos2d::Rect    return_rect; //¥]§t¦í«ö¶sªºªø¤è§Î
+    cocos2d::Rect    return_rect; //åŒ…å«ä½æŒ‰éˆ•çš„é•·æ–¹å½¢
 
-    //int _sceneno;
-    //std::string _strSceneNo;
+    int  _sceneno;
+    std::string _cSceneNo;
+    cocos2d::Label* _labelBMF;
+
+    // For Background Music
+    int _ibgMusic;
+
+    cocos2d::ui::Text* _sliderValue;	// ç”¨æ–¼é¡¯ç¤ºç›®å‰æ»‘å‹•æ¢ä¸Šçš„æ•¸å€¼
 
 public:
-
-    static cocos2d::Scene* createScene();  // ¦^¶Ç­È«¬§O¬O Scene ªºÀRºA«ü¼Ğ
-    virtual bool init(); // ³o­Ó¨ç¦¡±N·|¦b create() ¨ç¦¡¤¤³Q©I¥s
+    SceneCocos();
+    ~SceneCocos();
+    static cocos2d::Scene* createScene();
+    virtual bool init();  
     void update(float dt);
 
-    bool onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //Ä²¸I¶}©l¨Æ¥ó,¦^¶Ç­È¥²¶·¬O bool
-    void onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //Ä²¸I²¾°Ê¨Æ¥ó
-    void onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //Ä²¸Iµ²§ô¨Æ¥ó 
+    // å®šç¾© Callback function
+    void btn_CuberTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+    void checkBoxTouchEvent(cocos2d::Ref* object, cocos2d::ui::CheckBox::EventType type);
+    void sliderEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+
+    bool onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //è§¸ç¢°é–‹å§‹äº‹ä»¶,å›å‚³å€¼å¿…é ˆæ˜¯ bool
+    void onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //è§¸ç¢°ç§»å‹•äº‹ä»¶
+    void onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent); //è§¸ç¢°çµæŸäº‹ä»¶ 
 
     // implement the "static create()" method manually
-    CREATE_FUNC(Scene101); //®i¶}«á©w¸q¤F create() ¦¨­û¨ç¦¡
+    CREATE_FUNC(SceneCocos); //å±•é–‹å¾Œå®šç¾©äº† create() æˆå“¡å‡½å¼
 
 };
 
-#endif // __SCENE_101_H__
+#endif // __SCENE_102_H__

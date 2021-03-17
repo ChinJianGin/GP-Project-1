@@ -26,13 +26,13 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <true/>
+        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>cocos2d-x</string>
+        <string>cocos2d-v2</string>
         <key>textureFileName</key>
         <filename></filename>
         <key>flipPVR</key>
@@ -134,12 +134,6 @@
                 <key>name</key>
                 <filename>../scene101.plist</filename>
             </struct>
-            <key>header</key>
-            <key>source</key>
-            <struct type="DataFile">
-                <key>name</key>
-                <filename></filename>
-            </struct>
         </map>
         <key>multiPack</key>
         <false/>
@@ -148,7 +142,7 @@
         <key>outputFormat</key>
         <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
         <key>alphaHandling</key>
-        <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
+        <enum type="SettingsBase::AlphaHandling">KeepTransparentPixels</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>

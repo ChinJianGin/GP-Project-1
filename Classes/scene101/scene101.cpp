@@ -103,28 +103,28 @@ bool Scene101::init()
   
 // Touch 與 Button 的處理
     // add Return Button
-    this->returnbtn = Sprite::create("scene101/returnbtn.png");
-    size = returnbtn->getContentSize();
-    this->returnbtn->setPosition(Vec2(origin.x + size.width / 2 + 5, origin.y + visibleSize.height - size.height / 2 - 5));
-    Point pos = returnbtn->getPosition();
-    this->rectReturn = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
-    this->addChild(returnbtn, 1);
+    this->btn_return = Sprite::create("scene101/returnbtn.png");
+    size = btn_return->getContentSize();
+    this->btn_return->setPosition(Vec2(origin.x + size.width / 2 + 5, origin.y + visibleSize.height - size.height / 2 - 5));
+    Point pos = btn_return->getPosition();
+    this->return_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+    this->addChild(btn_return, 1);
 
     // add Replay Button
-    this->replaybtn = Sprite::create("scene101/replaybtn.png"); 
-    size = replaybtn->getContentSize();
-    this->replaybtn->setPosition(Vec2(origin.x + size.width / 2 + 90, origin.y + visibleSize.height - size.height / 2 - 5));
-    pos = replaybtn->getPosition();
-    this->rectReplay = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
-    this->addChild(replaybtn, 1);
+    this->btn_replay = Sprite::create("scene101/replaybtn.png");
+    size = btn_replay->getContentSize();
+    this->btn_replay->setPosition(Vec2(origin.x + size.width / 2 + 90, origin.y + visibleSize.height - size.height / 2 - 5));
+    pos = btn_replay->getPosition();
+    this->replay_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+    this->addChild(btn_replay, 1);
 
     // add Cuber Button
-    this->cuberbtn = Sprite::create("scene101/cuberbtn1.png");  
-    size = cuberbtn->getContentSize();
-    this->cuberbtn->setPosition(Vec2(origin.x + visibleSize.width - size.width / 2, origin.y + visibleSize.height - size.height / 2 - 60));
-    pos = cuberbtn->getPosition();
-    this->rectCuber = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
-    this->addChild(cuberbtn, 1);
+    this->btn_cuber = Sprite::create("scene101/cuberbtn1.png");
+    size = btn_cuber->getContentSize();
+    this->btn_cuber->setPosition(Vec2(origin.x + visibleSize.width - size.width / 2, origin.y + visibleSize.height - size.height / 2 - 60));
+    pos = btn_cuber->getPosition();
+    this->cuber_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+    this->addChild(btn_cuber, 1);
 
     //this->_sceneno = 101;
     //strcpy(this->_cSceneNo, "Scene 101");
@@ -163,13 +163,13 @@ void Scene101::update(float dt)
 bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸碰開始事件
 {
     Point touchLoc = pTouch->getLocation();
-    if (rectCuber.containsPoint(touchLoc)) {
+    if (cuber_rect.containsPoint(touchLoc)) {
 
     }
-    if (rectReplay.containsPoint(touchLoc)) {
+    if (replay_rect.containsPoint(touchLoc)) {
 
     }
-    if (rectReturn.containsPoint(touchLoc)) {
+    if (return_rect.containsPoint(touchLoc)) {
         unscheduleAllCallbacks();
         Director::getInstance()->end();
     }

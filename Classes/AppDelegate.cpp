@@ -1,4 +1,4 @@
-ï»¿/****************************************************************************
+/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -25,8 +25,10 @@
 #include "AppDelegate.h"
 //#include "HelloWorldScene.h"
 #include "scene101/scene101.h"
+#include "scene101/scene102.h"
+#include "scene101/scene_cocos.h"
 
-// #define USE_AUDIO_ENGINE 1
+#define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE && USE_SIMPLE_AUDIO_ENGINE
@@ -48,6 +50,8 @@ static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
 static cocos2d::Size screenResolutionSize = cocos2d::Size(1920, 1080);
+
+cocos2d::Size fSize;
 
 AppDelegate::AppDelegate()
 {
@@ -101,7 +105,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     auto frameSize = glview->getFrameSize();
-
+    fSize = frameSize;
     // if the frame's height is larger than the height of medium size.
     //if (frameSize.height > mediumResolutionSize.height)
     //{        
@@ -121,12 +125,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-//  auto scene = HelloWorld::createScene(); // å ´æ™¯å»ºç«‹æ™‚ï¼Œä¸ä½¿ç”¨è½‰å ´æ•ˆæžœ
-//  auto scene = TransitionMoveInL::create(0.6f, HelloWorld::createScene()); // ä½¿ç”¨è½‰å ´æ•ˆæžœ
-    auto scene = Scene101::createScene();
-    director->runWithScene(scene); // è¨­å®š director å¾žé€™å€‹ scene é–‹å§‹åŸ·è¡Œ
+//  auto scene = HelloWorld::createScene(); // ³õ´º«Ø¥ß®É¡A¤£¨Ï¥ÎÂà³õ®ÄªG
+//  auto scene = TransitionMoveInL::create(0.6f, HelloWorld::createScene()); // ¨Ï¥ÎÂà³õ®ÄªG
+//  auto scene = Scene101::createScene();
+//  auto scene = Scene102::createScene();
+    auto scene = SceneCocos::createScene();
+    director->runWithScene(scene); // ³]©w director ±q³o­Ó scene ¶}©l°õ¦æ
 
-    //  Director::getInstance()->replaceScene(scene); // é€™å€‹ API åªèƒ½ç”¨åœ¨ Scene å° Scene çš„åˆ‡æ›ä¸Š
+    //  Director::getInstance()->replaceScene(scene); // ³o­Ó API ¥u¯à¥Î¦b Scene ¹ï Scene ªº¤Á´«¤W
 
     return true;
 }
