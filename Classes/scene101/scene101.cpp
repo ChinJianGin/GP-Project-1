@@ -35,6 +35,14 @@ Scene* Scene101::createScene()
     return Scene101::create();
 }
 
+Scene101::Scene101() {
+    Sprite* bean01;
+    _bBean01 = false;
+}
+Scene101::~Scene101() {
+
+}
+
 
 // Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
@@ -65,6 +73,12 @@ bool Scene101::init()
     this->addChild(bkimage, 0);
 
     // 自行增加 sprite 將 bean01.png 到螢幕正中間
+    bean01 = Sprite::create("scene101/bean01.png");  // 使用 create 函式,給予檔名即可
+    bean01->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y)); // 位置通常放置在螢幕正中間
+    this->addChild(bean01, 0);
+    auto size = bean01->getContentSize();    
+    Point pos = bean01->getPosition();
+    this->bean01_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
 
     /////////////////////////////
     // 3. add your codes below...
@@ -74,7 +88,7 @@ bool Scene101::init()
     auto labelTTF = Label::createWithTTF("Scene 101", "fonts/Marker Felt.ttf", 32);
     labelTTF->setAlignment(cocos2d::TextHAlignment::CENTER); // 預設靠左對齊
     labelTTF->setWidth(100);	// 設定每行文字的顯示寬度
-    auto size = labelTTF->getContentSize();
+    size = labelTTF->getContentSize();
     labelTTF->setPosition(Vec2(origin.x + visibleSize.width - size.width / 2 - 10, origin.y + visibleSize.height - size.height / 2 - 10));
     this->addChild(labelTTF, 1);
 
@@ -89,10 +103,10 @@ bool Scene101::init()
     auto strings = FileUtils::getInstance()->getValueMapFromFile("scene101/strings.xml");
     std::string str1 = strings["text1"].asString();
     std::string str2 = strings["text2"].asString();
-    auto labelchi1 = Label::createWithBMFont("fonts/msblack48.fnt", str1);
-    auto labelchi2 = Label::createWithBMFont("fonts/msblack48.fnt", str2);
+    auto labelchi1 = Label::createWithBMFont("fonts/msblack72.fnt", str1);
+    auto labelchi2 = Label::createWithBMFont("fonts/msblack72.fnt", str2);
     size = labelchi1->getContentSize();
-    labelchi1->setColor(Color3B(255, 238, 217));
+    labelchi1->setColor(Color3B(255, 238, 0));
     labelchi1->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 80 - size.height));
     this->addChild(labelchi1, 1);
 
@@ -106,7 +120,7 @@ bool Scene101::init()
     this->btn_return = Sprite::create("scene101/returnbtn.png");
     size = btn_return->getContentSize();
     this->btn_return->setPosition(Vec2(origin.x + size.width / 2 + 5, origin.y + visibleSize.height - size.height / 2 - 5));
-    Point pos = btn_return->getPosition();
+    pos = btn_return->getPosition();
     this->return_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
     this->addChild(btn_return, 1);
 
@@ -163,6 +177,8 @@ void Scene101::update(float dt)
 bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸碰開始事件
 {
     Point touchLoc = pTouch->getLocation();
+    _bBean01 = true;
+    pt_old = touchLoc;
     if (cuber_rect.containsPoint(touchLoc)) {
 
     }
@@ -173,20 +189,30 @@ bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸
         unscheduleAllCallbacks();
         Director::getInstance()->end();
     }
-
+    if (bean01_rect.containsPoint(touchLoc)) {
+        log("touch");
+    }
   return true;
 }
 
 
 void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰移動事件
 {
-
+    Point touchLoc = pTouch->getLocation();
+    pt_cur = touchLoc;
+    if (_bBean01)
+    {
+        
+    }
 
 }
 
 void  Scene101::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰結束事件 
 {
-
+    Point touchLoc = pTouch->getLocation();
+    if (bean01_rect.containsPoint(touchLoc)) {
+        log("end");
+    }
 
 
 }

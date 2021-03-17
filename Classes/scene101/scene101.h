@@ -36,11 +36,15 @@ private:
     cocos2d::Rect    replay_rect;
     cocos2d::Rect    return_rect; //包含住按鈕的長方形
 
+    cocos2d::Sprite* bean01 = nullptr;
+    cocos2d::Rect    bean01_rect;
+
     //int _sceneno;
     //std::string _strSceneNo;
 
 public:
-
+    Scene101();
+    ~Scene101();
     static cocos2d::Scene* createScene();  // 回傳值型別是 Scene 的靜態指標
     virtual bool init(); // 這個函式將會在 create() 函式中被呼叫
     void update(float dt);

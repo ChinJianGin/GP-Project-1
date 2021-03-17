@@ -21,10 +21,10 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\scene101\scene101.cpp">
+      <Filter>src\scence101</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene101\scene_cocos.cpp">
       <Filter>src\scence101</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\scene101\scene101.h">
+      <Filter>src\scence101</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene101\scene_cocos.h">
       <Filter>src\scence101</Filter>
     </ClInclude>
   </ItemGroup>
@@ -46,5 +46,15 @@
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\CMakeLists.txt">
+      <Filter>src</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\scene101\strings.xml">
+      <Filter>src</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
