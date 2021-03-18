@@ -63,18 +63,19 @@ bool Scene101::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    float WindowCenterPoint_X = visibleSize.width / 2 + origin.x;
+    float WindowCenterPoint_Y = visibleSize.height / 2 + origin.y;
     /////////////////////////////
     // 2. 增加場景中的物件
     // 2. add a menu item with "X" image, which is clicked to quit the program you may modify it.
     //以 Sprite 作為背景
     Sprite* bkimage = Sprite::create(HOME_BACKGROUND);  // 使用 create 函式,給予檔名即可
-    bkimage->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y)); // 位置通常放置在螢幕正中間
+    bkimage->setPosition(Vec2(WindowCenterPoint_X, WindowCenterPoint_Y)); // 位置通常放置在螢幕正中間
     this->addChild(bkimage, 0);
 
     // 自行增加 sprite 將 bean01.png 到螢幕正中間
     bean01 = Sprite::create("scene101/bean01.png");  // 使用 create 函式,給予檔名即可
-    bean01->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y)); // 位置通常放置在螢幕正中間
+    bean01->setPosition(Vec2(WindowCenterPoint_X, WindowCenterPoint_Y)); // 位置通常放置在螢幕正中間
     this->addChild(bean01, 0);
     auto size = bean01->getContentSize();    
     Point pos = bean01->getPosition();
@@ -177,8 +178,8 @@ void Scene101::update(float dt)
 bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸碰開始事件
 {
     Point touchLoc = pTouch->getLocation();
-    _bBean01 = true;
-    pt_old = touchLoc;
+    
+    
     if (cuber_rect.containsPoint(touchLoc)) {
 
     }
@@ -190,7 +191,9 @@ bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸
         Director::getInstance()->end();
     }
     if (bean01_rect.containsPoint(touchLoc)) {
-        log("touch");
+        pt_old = touchLoc;
+        _bBean01 = true;
+        log("pt_old");
     }
   return true;
 }
@@ -202,7 +205,15 @@ void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //�
     pt_cur = touchLoc;
     if (_bBean01)
     {
+         
+        Point Tra = pt_cur - pt_old;
+        auto size = bean01->getContentSize();
+        Point pos = bean01->getPosition();
         
+        this->bean01->setPosition(Vec2(pos.x + Tra.x  , pos.y + Tra.y ));
+        this->bean01_rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+        pt_old = pt_old + Tra;
+        log("Dragging");
     }
 
 }
@@ -211,6 +222,7 @@ void  Scene101::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //�
 {
     Point touchLoc = pTouch->getLocation();
     if (bean01_rect.containsPoint(touchLoc)) {
+        _bBean01 = false;
         log("end");
     }
 

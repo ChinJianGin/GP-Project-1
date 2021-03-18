@@ -39,6 +39,9 @@ private:
     cocos2d::Sprite* bean01 = nullptr;
     cocos2d::Rect    bean01_rect;
 
+    cocos2d::Point pt_cur, pt_old;
+    bool _bBean01;
+
     //int _sceneno;
     //std::string _strSceneNo;
 
