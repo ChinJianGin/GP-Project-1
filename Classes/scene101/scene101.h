@@ -26,6 +26,7 @@
 #define __SCENE_101_H__
 
 #include "cocos2d.h"
+#include "bean01.h"
 class Scene101 : public cocos2d::Scene
 {
 private:
@@ -35,12 +36,11 @@ private:
     cocos2d::Rect    cuber_rect;
     cocos2d::Rect    replay_rect;
     cocos2d::Rect    return_rect; //包含住按鈕的長方形
-
-    cocos2d::Sprite* bean01 = nullptr;
-    cocos2d::Rect    bean01_rect;
-
-    cocos2d::Point pt_cur, pt_old;
-    bool _bBean01;
+    bean01* bean_container = nullptr;
+    //cocos2d::Sprite* bean01 = nullptr;
+    //cocos2d::Rect    bean01_rect;
+    //cocos2d::Point pt_cur, pt_old;
+    //bool _bBean01;
 
     //int _sceneno;
     //std::string _strSceneNo;

@@ -27,6 +27,9 @@
     <ClCompile Include="..\Classes\scene101\scene_cocos.cpp">
       <Filter>src\scence101</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\scene101\bean01.cpp">
+      <Filter>src\scence101</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -39,6 +42,9 @@
       <Filter>src\scence101</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\scene101\scene_cocos.h">
+      <Filter>src\scence101</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene101\bean01.h">
       <Filter>src\scence101</Filter>
     </ClInclude>
   </ItemGroup>
