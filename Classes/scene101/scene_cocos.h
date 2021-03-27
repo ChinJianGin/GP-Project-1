@@ -27,6 +27,7 @@
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"  // For Cocos Studio 控制項元件
+#include "cocostudio/CocoStudio.h"
 
 class SceneCocos : public cocos2d::Scene
 {
@@ -42,10 +43,14 @@ private:
     std::string _cSceneNo;
     cocos2d::Label* _labelBMF;
 
-    // For Background Music
+    // for Background Music
     int _ibgMusic;
 
+    // for slider
     cocos2d::ui::Text* _sliderValue;	// 用於顯示目前滑動條上的數值
+
+    // for animation control
+    cocostudio::timeline::ActionTimeline* _triAction;
 
 public:
     SceneCocos();

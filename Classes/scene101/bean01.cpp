@@ -32,6 +32,27 @@ void bean01::setBean_size(bean01* bean) {
 void bean01::setBean_pos(bean01* bean) {
 	bean_pos = bean->getBean01()->getPosition();
 }
+void bean01::beanOnTouchBegan(cocos2d::Point touchLoc) {
+	if (getBean01_rect().containsPoint(touchLoc)) {
+		setPt_old(touchLoc);
+		set_bBean01(true);
+	}	
+}
+void bean01::beanOnTouchMove(cocos2d::Point touchLoc) {
+	setPt_cur(touchLoc);
+	if (this->get_bBean01()) {
+		this->getBean01()->setPosition(cocos2d::Vec2(this->getBean_pos().x + this->drag_cal().x, this->getBean_pos().y + this->drag_cal().y));
+		setBean_size(this);
+		setBean_pos(this);
+		setBean01_rect();
+		setPt_old(this->getPt_old() + this->drag_cal());
+	}
+}
+void bean01::beanOnTouchEnd() {
+	if (this->get_bBean01()) {
+		this->set_bBean01(false);
+	}
+}
 float bean01::getPosition_x() {
 	return position_x;
 }

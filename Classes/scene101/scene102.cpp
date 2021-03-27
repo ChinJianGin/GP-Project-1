@@ -22,27 +22,31 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "scene101.h"
+#include "scene102.h"
 #include "SimpleAudioEngine.h"
-#include "bean01.h"
+//#include "bean01.h"
+extern cocos2d::Size fSize;
 
 
 #define HOME_BACKGROUND "scene101/s101bgimg.png"
 
 USING_NS_CC;
 
-Scene* Scene101::createScene()
+Scene* scene102::createScene()
 {
-    return Scene101::create();
+    return scene102::create();
 }
 
-Scene101::Scene101() {
+scene102::scene102() {
    
-   bean01* bean_container = nullptr;
+   //bean01* bean_container = nullptr;
    
    // _bBean01 = false;
 }
-Scene101::~Scene101() {
+scene102::~scene102() {
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("scene101/scene101.plist");
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("scene101/scene101bg.plist");
+    Director::getInstance()->getTextureCache()->removeUnusedTextures(); // 釋放用不到的TEXTURE
 
 }
 
@@ -55,7 +59,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool Scene101::init()
+bool scene102::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -69,17 +73,26 @@ bool Scene101::init()
     float WindowCenterPoint_X = visibleSize.width / 2 + origin.x;
     float WindowCenterPoint_Y = visibleSize.height / 2 + origin.y;
     /////////////////////////////
+
+
+
+
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Scene101/scene101.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Scene101/scene101bg.plist");
+
     // 2. 增加場景中的物件
     // 2. add a menu item with "X" image, which is clicked to quit the program you may modify it.
     //以 Sprite 作為背景
-    Sprite* bkimage = Sprite::create(HOME_BACKGROUND);  // 使用 create 函式,給予檔名即可
+    Sprite* bkimage = Sprite::createWithSpriteFrameName("s101bgimg.png");
+    //::create(HOME_BACKGROUND);  // 使用 create 函式,給予檔名即可
     bkimage->setPosition(Vec2(WindowCenterPoint_X, WindowCenterPoint_Y)); // 位置通常放置在螢幕正中間
     this->addChild(bkimage, 0);
 
     // 自行增加 sprite 將 bean01.png 到螢幕正中間
     //bean01 bean("scene101/bean01.png", WindowCenterPoint_X, WindowCenterPoint_Y, this);
     
-    bean_container = new bean01("scene101/bean01.png", WindowCenterPoint_X, WindowCenterPoint_Y, this);
+    //bean_container = new bean01("scene101/bean01.png", WindowCenterPoint_X, WindowCenterPoint_Y, this);
+    
     
 
 
@@ -97,6 +110,10 @@ bool Scene101::init()
 
 // 文字的加入
     // label 使用 TTF 與 BitMap Font
+    std::ostringstream ostr;
+    ostr << static_cast<int>(fSize.width);
+    std::string buffer = ostr.str();
+
     auto labelTTF = Label::createWithTTF("Scene 101", "fonts/Marker Felt.ttf", 32);
     labelTTF->setAlignment(cocos2d::TextHAlignment::CENTER); // 預設靠左對齊
     labelTTF->setWidth(100);	// 設定每行文字的顯示寬度
@@ -105,7 +122,12 @@ bool Scene101::init()
     this->addChild(labelTTF, 1);
 
     //一般(非中文字)文字的顯示方式
-    auto labelBMF = Label::createWithBMFont("fonts/couriernew32.fnt", "Scene 101");
+    ostr.str(""); // 設定字串為 null
+    this->_sceneno = 102;  ostr << _sceneno;
+    _strSceneNo = ostr.str();
+    labelBMF = Label::createWithBMFont("fonts/couriernew32.fnt", _strSceneNo);
+
+    //auto labelBMF = Label::createWithBMFont("fonts/couriernew32.fnt", "Scene 101");
     size = labelBMF->getContentSize();
     labelBMF->setColor(Color3B::WHITE);
     labelBMF->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - size.height));
@@ -157,25 +179,25 @@ bool Scene101::init()
 
     //創建一個一對一的事件聆聽器
     auto listener = EventListenerTouchOneByOne::create();	
-    listener->onTouchBegan = CC_CALLBACK_2(Scene101::onTouchBegan, this);
-    listener->onTouchMoved = CC_CALLBACK_2(Scene101::onTouchMoved, this);//加入觸碰移動事件
-    listener->onTouchEnded = CC_CALLBACK_2(Scene101::onTouchEnded, this);//加入觸碰離開事件
+    listener->onTouchBegan = CC_CALLBACK_2(scene102::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(scene102::onTouchMoved, this);//加入觸碰移動事件
+    listener->onTouchEnded = CC_CALLBACK_2(scene102::onTouchEnded, this);//加入觸碰離開事件
 
 
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);	//加入剛創建的事件聆聽器
-    this->schedule(CC_SCHEDULE_SELECTOR(Scene101::update));
+    this->schedule(CC_SCHEDULE_SELECTOR(scene102::update));
 
- //   schedule(CC_SCHEDULE_SELECTOR(Scene101::update));
+ //   schedule(CC_SCHEDULE_SELECTOR(scene102::update));
 
     return true;
 }
 
-void Scene101::update(float dt)
+void scene102::update(float dt)
 {
 
 }
 //
-//void Scene101::menuCloseCallback(Ref* pSender)
+//void scene102::menuCloseCallback(Ref* pSender)
 //{
 //    //Close the cocos2d-x game scene and quit the application
 //    Director::getInstance()->end();
@@ -186,7 +208,7 @@ void Scene101::update(float dt)
 //    //_eventDispatcher->dispatchEvent(&customEndEvent);
 // }
 
-bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸碰開始事件
+bool scene102::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸碰開始事件
 {
     Point touchLoc = pTouch->getLocation();
     
@@ -201,20 +223,23 @@ bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸
         unscheduleAllCallbacks();
         Director::getInstance()->end();
     }
-    bean_container->beanOnTouchBegan(touchLoc);
-   /* if (bean_container->getBean01_rect().containsPoint(touchLoc)) {
+    /*if (bean_container->getBean01_rect().containsPoint(touchLoc)) {
         bean_container->setPt_old(touchLoc);
         bean_container->set_bBean01(true);
         log("pt_old");
     }*/
+    std::ostringstream ostr;
+    ostr << _sceneno++;
+    _strSceneNo = ostr.str();
+    labelBMF->setString(_strSceneNo);
+
   return true;
 }
 
 
-void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰移動事件
+void scene102::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰移動事件
 {
     Point touchLoc = pTouch->getLocation();
-    bean_container->beanOnTouchMove(touchLoc);
     /*bean_container->setPt_cur(touchLoc);
     if (bean_container->get_bBean01()) {
         bean_container->getBean01()->setPosition(Vec2(bean_container->getBean_pos().x + bean_container->drag_cal().x, bean_container->getBean_pos().y + bean_container->drag_cal().y));
@@ -239,10 +264,9 @@ void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //�
 
 }
 
-void  Scene101::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰結束事件 
+void  scene102::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰結束事件 
 {
     Point touchLoc = pTouch->getLocation();
-    bean_container->beanOnTouchEnd();
     /*if (bean_container->get_bBean01()) {
         bean_container->set_bBean01(false);
     }*/

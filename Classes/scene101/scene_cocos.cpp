@@ -23,7 +23,6 @@
  ****************************************************************************/
 
 #include "scene_cocos.h"
-#include "cocostudio/CocoStudio.h"
 
 //#include "SimpleAudioEngine.h"
 
@@ -36,7 +35,7 @@
 //#define CheckBox_Example 1
 //#define LoadingBar_Example 1
 //#define Slider_Example 1
-
+//#define Animation_Example 1
 
 #ifdef Audio_Example 1
 #include "audio/include/AudioEngine.h"
@@ -45,7 +44,7 @@ using namespace cocos2d::experimental;
 
 USING_NS_CC;
 using namespace cocostudio::timeline;
-using namespace ui;
+using namespace cocos2d::ui;
 //using namespace CocosDenshion;
 
 extern cocos2d::Size fSize;
@@ -57,6 +56,8 @@ SceneCocos::SceneCocos()
     _sceneno = 0;
     _labelBMF = nullptr;
     _ibgMusic = -1; // 背景音樂的編號為 -1
+    _sliderValue = nullptr;
+    _triAction = nullptr;
 }
 
 SceneCocos::~SceneCocos()
@@ -110,6 +111,11 @@ bool SceneCocos::init()
     cocos2d::Point pt = btn_cuber->getPosition();
     cuber_rect = Rect(pt.x - size.width / 2, pt.y - size.height / 2, size.width, size.height);
 
+    btn_return = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("returnbtn"));
+    size = btn_return->getContentSize();
+    pt = btn_return->getPosition();
+    return_rect = Rect(pt.x - size.width / 2, pt.y - size.height / 2, size.width, size.height);
+
 // 音樂與音效的加入
 #ifdef Audio_Example
     _ibgMusic = AudioEngine::play2d("./scene101/music/sr_bg.mp3",true);
@@ -160,9 +166,38 @@ bool SceneCocos::init()
     slider->setMaxPercent(100);// 可以設定超過 100，但超過100會讓捲動鈕的顯示會有問題
 #endif
   
-// Touch 與 Button 的處理
+#ifdef Animation_Example
+    auto runner1 = CSLoader::createNode("runner_node.csb"); //讀入節點資料
+    runner1->setPosition(1040, 320);
+    runner1->setColor(Color3B(135, 250, 50));
+    this->addChild(runner1); // 加入 scence 中
 
+    // 讀取並設定動畫撥放
+    auto runnerAct = CSLoader::createTimeline("runner_node.csb"); // 讀取動畫並建立【動作】
+    runnerAct->gotoFrameAndPlay(0, 24, true); // 撥放指定範圍內的動畫, true 代表重複撥放
+    runnerAct->setTimeSpeed(1.0f); // 一倍速
+    runner1->runAction(runnerAct); // 讓 sprite 執行該【動作】
 
+    //組合式的動畫物件
+    auto triRoot1 = CSLoader::createNode("triangle_node.csb"); //讀入節點資料
+    triRoot1->setPosition(140, 320);
+    this->addChild(triRoot1); // 加入 scence 中
+
+    // 一進入場景就撥放
+    auto triAction = CSLoader::createTimeline("triangle_node.csb");
+    triRoot1->runAction(triAction);
+    triAction->setTimeSpeed(0.5f);	// 0.5倍速
+    triAction->gotoFrameAndPlay(0, 35, false);
+
+    // 點擊後撥放
+    auto triRoot2 = CSLoader::createNode("triangle_node.csb");
+    triRoot2->setPosition(340, 320);
+    this->addChild(triRoot2); // 加入 scence 中
+
+    _triAction = CSLoader::createTimeline("triangle_node.csb");
+    triRoot2->runAction(_triAction);
+    _triAction->setTimeSpeed(1.125f);// 1.125 倍速
+#endif
 
     //創建一個一對一的事件聆聽器
     auto listener = EventListenerTouchOneByOne::create();	
@@ -175,7 +210,6 @@ bool SceneCocos::init()
 
     return true;
 }
-
 
 void SceneCocos::btn_CuberTouchEvent(Ref* pSender, Widget::TouchEventType type)
 {
@@ -248,6 +282,10 @@ bool SceneCocos::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//�
         unscheduleAllCallbacks();
         Director::getInstance()->end();
     }
+
+#ifdef Animation_Example
+    _triAction->gotoFrameAndPlay(0, 35, false);
+#endif
 
   return true;
 }

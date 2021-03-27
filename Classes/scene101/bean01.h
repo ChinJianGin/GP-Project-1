@@ -24,7 +24,6 @@ public:
 		bean_size = bean01_container->getContentSize();
 		bean_pos = bean01_container->getPosition();
 		bean01_rect = cocos2d::Rect(bean_pos.x - bean_size.width / 2, bean_pos.y - bean_size.height / 2, bean_size.width, bean_size.height);		
-		//pt_cur = pt_old = nullptr;
 		_bBean01 = false;
 	}
 	~bean01();
@@ -36,6 +35,9 @@ public:
 	void setBean(bean01* bean);
 	void setBean_size(bean01* bean);
 	void setBean_pos(bean01* bean);
+	void beanOnTouchBegan(cocos2d::Point touchLoc);
+	void beanOnTouchMove(cocos2d::Point touchLoc);
+	void beanOnTouchEnd();
 	float getPosition_x();
 	float getPosition_y();
 	cocos2d::Sprite* getBean01();
