@@ -26,16 +26,16 @@
 
 //#include "SimpleAudioEngine.h"
 
-//#define EXERCISE 1
+#define EXERCISE 1
 //#define Audio_Example  1
-//#define Sprite_Example 1
-//#define Button_Example 1
+#define Sprite_Example 1
+#define Button_Example 1
 //#define Button_Example 1
 //#define TTFBMF_Example 1
 //#define CheckBox_Example 1
 //#define LoadingBar_Example 1
 //#define Slider_Example 1
-//#define Animation_Example 1
+#define Animation_Example 1
 
 #ifdef Audio_Example 1
 #include "audio/include/AudioEngine.h"
@@ -126,13 +126,14 @@ bool SceneCocos::init()
 
 // Sprite 的加入
  #ifdef Sprite_Example
-    auto runner = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("cuber01"));
-    runner->setColor(Color3B(75, 155, 77));
-    pt = runner->getPosition();
-    auto jumpAction = cocos2d::JumpTo::create(1.25f, Point(pt.x - 600, pt.y), 100, 3);
+    _runner = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("cuber01"));
+    _runner->setColor(Color3B(75, 155, 77));
+    pt = _runner->getPosition();
+    _jumpAction = cocos2d::JumpTo::create(1.25f, Point(pt.x - 600, pt.y), 100, 3);
     auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(50, 125, 250));
-    runner->runAction(tintTo);
-    runner->runAction(jumpAction);
+    _runner->runAction(tintTo);
+    //runner->runAction(jumpAction);
+    _jumpAction->retain();
 #endif
 
 #ifdef Button_Example
@@ -178,25 +179,25 @@ bool SceneCocos::init()
     runnerAct->setTimeSpeed(1.0f); // 一倍速
     runner1->runAction(runnerAct); // 讓 sprite 執行該【動作】
 
-    //組合式的動畫物件
-    auto triRoot1 = CSLoader::createNode("triangle_node.csb"); //讀入節點資料
-    triRoot1->setPosition(140, 320);
-    this->addChild(triRoot1); // 加入 scence 中
+    ////組合式的動畫物件
+    //auto triRoot1 = CSLoader::createNode("triangle_node.csb"); //讀入節點資料
+    //triRoot1->setPosition(140, 320);
+    //this->addChild(triRoot1); // 加入 scence 中
 
-    // 一進入場景就撥放
-    auto triAction = CSLoader::createTimeline("triangle_node.csb");
-    triRoot1->runAction(triAction);
-    triAction->setTimeSpeed(0.5f);	// 0.5倍速
-    triAction->gotoFrameAndPlay(0, 35, false);
+    //// 一進入場景就撥放
+    //auto triAction = CSLoader::createTimeline("triangle_node.csb");
+    //triRoot1->runAction(triAction);
+    //triAction->setTimeSpeed(0.5f);	// 0.5倍速
+    //triAction->gotoFrameAndPlay(0, 35, false);
 
-    // 點擊後撥放
-    auto triRoot2 = CSLoader::createNode("triangle_node.csb");
-    triRoot2->setPosition(340, 320);
-    this->addChild(triRoot2); // 加入 scence 中
+    //// 點擊後撥放
+    //auto triRoot2 = CSLoader::createNode("triangle_node.csb");
+    //triRoot2->setPosition(340, 320);
+    //this->addChild(triRoot2); // 加入 scence 中
 
-    _triAction = CSLoader::createTimeline("triangle_node.csb");
-    triRoot2->runAction(_triAction);
-    _triAction->setTimeSpeed(1.125f);// 1.125 倍速
+    //_triAction = CSLoader::createTimeline("triangle_node.csb");
+    //triRoot2->runAction(_triAction);
+    //_triAction->setTimeSpeed(1.125f);// 1.125 倍速
 #endif
 
     //創建一個一對一的事件聆聽器

@@ -39,6 +39,10 @@ private:
     cocos2d::Rect    replay_rect;
     cocos2d::Rect    return_rect; //包含住按鈕的長方形
 
+    cocos2d::Action* _jumpAction;
+    cocos2d::Sprite* _runner;
+
+
     int  _sceneno;
     std::string _cSceneNo;
     cocos2d::Label* _labelBMF;

@@ -201,7 +201,12 @@ bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸
         unscheduleAllCallbacks();
         Director::getInstance()->end();
     }
+
+
     bean_container->beanOnTouchBegan(touchLoc);
+
+
+
    /* if (bean_container->getBean01_rect().containsPoint(touchLoc)) {
         bean_container->setPt_old(touchLoc);
         bean_container->set_bBean01(true);
@@ -214,7 +219,13 @@ bool Scene101::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//觸
 void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰移動事件
 {
     Point touchLoc = pTouch->getLocation();
+
+
+
     bean_container->beanOnTouchMove(touchLoc);
+
+
+
     /*bean_container->setPt_cur(touchLoc);
     if (bean_container->get_bBean01()) {
         bean_container->getBean01()->setPosition(Vec2(bean_container->getBean_pos().x + bean_container->drag_cal().x, bean_container->getBean_pos().y + bean_container->drag_cal().y));
@@ -242,7 +253,11 @@ void Scene101::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //�
 void  Scene101::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰結束事件 
 {
     Point touchLoc = pTouch->getLocation();
+
+
     bean_container->beanOnTouchEnd();
+
+
     /*if (bean_container->get_bBean01()) {
         bean_container->set_bBean01(false);
     }*/
