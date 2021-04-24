@@ -23,17 +23,16 @@
  ****************************************************************************/
 
 #include "scene_cocos.h"
-
+#include "scene101/scene101.h"
 //#include "SimpleAudioEngine.h"
 
-#define EXERCISE 1
+#define EXERCISE 2
 //#define Audio_Example  1
 #define Sprite_Example 1
 #define Button_Example 1
-//#define Button_Example 1
 //#define TTFBMF_Example 1
 //#define CheckBox_Example 1
-//#define LoadingBar_Example 1
+#define LoadingBar_Example 1
 //#define Slider_Example 1
 #define Animation_Example 1
 
@@ -43,6 +42,7 @@ using namespace cocos2d::experimental;
 #endif
 
 USING_NS_CC;
+
 using namespace cocostudio::timeline;
 using namespace cocos2d::ui;
 //using namespace CocosDenshion;
@@ -58,6 +58,10 @@ SceneCocos::SceneCocos()
     _ibgMusic = -1; // 背景音樂的編號為 -1
     _sliderValue = nullptr;
     _triAction = nullptr;
+
+#ifdef MOVEABLE_OBJECT
+    _mobj = nullptr;
+#endif
 }
 
 SceneCocos::~SceneCocos()
@@ -69,7 +73,9 @@ SceneCocos::~SceneCocos()
 #if EXERCISE == 1
     _jumpAction->release();
 #endif
-
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("scene101.plist");
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("scene101bg.plist");
+    Director::getInstance()->getTextureCache()->removeUnusedTextures(); // 釋放用不到的TEXTURE
 }
 
 
@@ -120,7 +126,7 @@ bool SceneCocos::init()
 #ifdef Audio_Example
     _ibgMusic = AudioEngine::play2d("./scene101/music/sr_bg.mp3",true);
     auto effectid = AudioEngine::play2d("./scene101/music/gain_point.mp3", false);
-    AudioEngine::setVolume(_ibgMusic, 0.4f);
+    AudioEngine::setVolume(_ibgMusic, 1.0f);
     // AudioEngine::preload("./scene101/music/sr_bg.mp3"); // 事先載入背景音樂
 #endif
 
@@ -129,10 +135,11 @@ bool SceneCocos::init()
     _runner = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("cuber01"));
     _runner->setColor(Color3B(75, 155, 77));
     pt = _runner->getPosition();
+    //auto jumpAction = cocos2d::JumpTo::create(1.25f, Point(pt.x - 600, pt.y), 100, 3);
     _jumpAction = cocos2d::JumpTo::create(1.25f, Point(pt.x - 600, pt.y), 100, 3);
     auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(50, 125, 250));
     _runner->runAction(tintTo);
-    //runner->runAction(jumpAction);
+    //_runner->runAction(_jumpAction);
     _jumpAction->retain();
 #endif
 
@@ -154,9 +161,9 @@ bool SceneCocos::init()
 #endif
 
 #ifdef LoadingBar_Example
-    auto loadingBar = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("loadingbar_1"));
-    loadingBar->setDirection(LoadingBar::Direction::LEFT);
-    loadingBar->setPercent(50);
+    _loadingBar = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("loadingbar_1"));
+    _loadingBar->setDirection(LoadingBar::Direction::LEFT);
+    _loadingBar->setPercent(100);
 #endif
 
 #ifdef Slider_Example
@@ -168,36 +175,44 @@ bool SceneCocos::init()
 #endif
   
 #ifdef Animation_Example
-    auto runner1 = CSLoader::createNode("runner_node.csb"); //讀入節點資料
+    auto runner1 = CSLoader::createNode("watson_run.csb"); //讀入節點資料
     runner1->setPosition(1040, 320);
-    runner1->setColor(Color3B(135, 250, 50));
+    //runner1->setColor(Color3B(135, 250, 50));
     this->addChild(runner1); // 加入 scence 中
 
     // 讀取並設定動畫撥放
-    auto runnerAct = CSLoader::createTimeline("runner_node.csb"); // 讀取動畫並建立【動作】
-    runnerAct->gotoFrameAndPlay(0, 24, true); // 撥放指定範圍內的動畫, true 代表重複撥放
+    auto runnerAct = CSLoader::createTimeline("watson_run.csb"); // 讀取動畫並建立【動作】
+    runnerAct->gotoFrameAndPlay(0, 30, true); // 撥放指定範圍內的動畫, true 代表重複撥放
     runnerAct->setTimeSpeed(1.0f); // 一倍速
     runner1->runAction(runnerAct); // 讓 sprite 執行該【動作】
 
     ////組合式的動畫物件
-    //auto triRoot1 = CSLoader::createNode("triangle_node.csb"); //讀入節點資料
-    //triRoot1->setPosition(140, 320);
-    //this->addChild(triRoot1); // 加入 scence 中
+    auto triRoot1 = CSLoader::createNode("triangle_node.csb"); //讀入節點資料
+    triRoot1->setPosition(140, 320);
+    this->addChild(triRoot1); // 加入 scence 中
 
     //// 一進入場景就撥放
-    //auto triAction = CSLoader::createTimeline("triangle_node.csb");
-    //triRoot1->runAction(triAction);
-    //triAction->setTimeSpeed(0.5f);	// 0.5倍速
-    //triAction->gotoFrameAndPlay(0, 35, false);
+    auto triAction = CSLoader::createTimeline("triangle_node.csb");
+    triRoot1->runAction(triAction);
+    triAction->setTimeSpeed(0.5f);	// 0.5倍速
+    triAction->gotoFrameAndPlay(0, 35, false);
 
     //// 點擊後撥放
-    //auto triRoot2 = CSLoader::createNode("triangle_node.csb");
-    //triRoot2->setPosition(340, 320);
-    //this->addChild(triRoot2); // 加入 scence 中
+    auto triRoot2 = CSLoader::createNode("triangle_node.csb");
+    triRoot2->setPosition(340, 320);
+    this->addChild(triRoot2); // 加入 scence 中
 
-    //_triAction = CSLoader::createTimeline("triangle_node.csb");
-    //triRoot2->runAction(_triAction);
-    //_triAction->setTimeSpeed(1.125f);// 1.125 倍速
+    _triAction = CSLoader::createTimeline("triangle_node.csb");
+    triRoot2->runAction(_triAction);
+    _triAction->setTimeSpeed(1.125f);// 1.125 倍速
+    _triAction->gotoFrameAndPlay(0, 0, false);
+#endif
+
+#ifdef MOVEABLE_OBJECT
+    _mobj = new (std::nothrow)CMoveableObject();
+//  _mobj = std::make_unique<CMoveableObject>();  // 與  std::unique_ptr<CMoveableObject> _mobj; 一組
+    _mobj->setPropertySF("bean01.png", *this);
+    _mobj->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 #endif
 
     //創建一個一對一的事件聆聽器
@@ -280,12 +295,18 @@ bool SceneCocos::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//�
 
     }
     if (return_rect.containsPoint(touchLoc)) {
-        unscheduleAllCallbacks();
-        Director::getInstance()->end();
+        //unscheduleAllCallbacks();
+        //Director::getInstance()->end();
+        auto scene = Scene101::createScene();  //轉場API
+        Director::getInstance()->replaceScene(scene); // 這個 API 只能用在 Scene 對 Scene 的切換上
     }
 
 #ifdef Animation_Example
     _triAction->gotoFrameAndPlay(0, 35, false);
+#endif
+
+#ifdef MOVEABLE_OBJECT
+    _mobj->onBegan(touchLoc);
 #endif
 
   return true;
@@ -295,13 +316,18 @@ bool SceneCocos::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)//�
 
 void SceneCocos::onTouchMoved(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰移動事件
 {
-
-
+#ifdef MOVEABLE_OBJECT
+    Point touchLoc = pTouch->getLocation();
+    _mobj->onMoved(touchLoc);
+#endif
 }
 
 void  SceneCocos::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) //觸碰結束事件 
 {
 
-
+#ifdef MOVEABLE_OBJECT
+    Point touchLoc = pTouch->getLocation();
+    _mobj->onEnded(touchLoc);
+#endif
 
 }

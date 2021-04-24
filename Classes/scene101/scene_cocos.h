@@ -28,6 +28,9 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"  // For Cocos Studio 控制項元件
 #include "cocostudio/CocoStudio.h"
+#include "patterns/CMoveableObject.h"
+
+#define MOVEABLE_OBJECT 1
 
 class SceneCocos : public cocos2d::Scene
 {
@@ -38,11 +41,7 @@ private:
     cocos2d::Rect    cuber_rect;
     cocos2d::Rect    replay_rect;
     cocos2d::Rect    return_rect; //包含住按鈕的長方形
-
-    cocos2d::Action* _jumpAction;
-    cocos2d::Sprite* _runner;
-
-
+    cocos2d::ui::LoadingBar* _loadingBar;
     int  _sceneno;
     std::string _cSceneNo;
     cocos2d::Label* _labelBMF;
@@ -56,15 +55,25 @@ private:
     // for animation control
     cocostudio::timeline::ActionTimeline* _triAction;
 
+    cocos2d::Action *_jumpAction;
+    cocos2d::Sprite *_runner;
+
 public:
     SceneCocos();
     ~SceneCocos();
+
+#ifdef MOVEABLE_OBJECT
+    //std::unique_ptr<CMoveableObject> _mobj; //C++ 11 smart pointer, 無須釋放取得的資源, 會自動釋放
+    CMoveableObject* _mobj;
+#endif
+
     static cocos2d::Scene* createScene();
     virtual bool init();  
     void update(float dt);
 
     // 定義 Callback function
     void btn_CuberTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+
     void checkBoxTouchEvent(cocos2d::Ref* object, cocos2d::ui::CheckBox::EventType type);
     void sliderEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 
