@@ -17,6 +17,11 @@ public:
 		loctag.setVisible(false);
 		theScene.addChild(CCharacter::_characterRoot, 5);
 
+		CCharacter::_characterJumpAct = CSLoader::createTimeline("tallerenemy.csb");
+		CCharacter::_characterJumpAct->gotoFrameAndPlay(30, 58, false);
+		CCharacter::_characterJumpAct->setTimeSpeed(1.0f);
+		CCharacter::_characterRoot->runAction(CCharacter::_characterJumpAct);
+
 		CCharacter::_characterRunAct = CSLoader::createTimeline("tallerenemy.csb");
 		CCharacter::_characterRunAct->gotoFrameAndPlay(0, 24, true);
 		CCharacter::_characterRunAct->setTimeSpeed(1.0f);
@@ -24,4 +29,5 @@ public:
 
 		_myDifficulty = CEnemy::LV::TALLER;
 	}
+
 };

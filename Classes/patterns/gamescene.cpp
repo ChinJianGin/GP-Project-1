@@ -97,9 +97,9 @@ bool GameScene::init()
 
 	_watsonRunner = new CRunner();
 	_watsonRunner->characterInit(*loctag, *this);
-	_watsonRunner->doJumpHigh();
+	_watsonRunner->doJump();
 
-	_normalEnemy = new normalEnemy();
+	_normalEnemy = new speedEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
 	
 

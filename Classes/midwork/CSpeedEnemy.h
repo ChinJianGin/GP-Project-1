@@ -17,8 +17,13 @@ public:
 		loctag.setVisible(false);
 		theScene.addChild(CCharacter::_characterRoot, 5);
 
+		CCharacter::_characterJumpAct = CSLoader::createTimeline("speedenemy.csb");
+		CCharacter::_characterJumpAct->gotoFrameAndPlay(0, 12, false);
+		CCharacter::_characterJumpAct->setTimeSpeed(1.0f);
+		CCharacter::_characterRoot->runAction(CCharacter::_characterJumpAct);
+
 		CCharacter::_characterRunAct = CSLoader::createTimeline("speedenemy.csb");
-		CCharacter::_characterRunAct->gotoFrameAndPlay(0, 12, true);
+		CCharacter::_characterRunAct->gotoFrameAndPlay(20, 32, true);
 		CCharacter::_characterRunAct->setTimeSpeed(1.0f);
 		CCharacter::_characterRoot->runAction(CCharacter::_characterRunAct);
 
