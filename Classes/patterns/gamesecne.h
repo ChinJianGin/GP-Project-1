@@ -5,6 +5,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "Common/CButton.h"
 #include "Common/CMiddleObject.h"
+#include "midwork/CRunner.h"
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -37,5 +38,5 @@ private:
 
     CMiddleObject * _midobj;
 
-  
+    CRunner* _watsonRunner;
 };

@@ -19,6 +19,9 @@
     <Filter Include="src\patterns">
       <UniqueIdentifier>{f939c0a3-3ffd-4e71-b234-bd7c2360b2e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\midwork">
+      <UniqueIdentifier>{57a73851-45d8-4d49-9c7f-e9c7f3f8cfd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +66,9 @@
     <ClCompile Include="..\Classes\patterns\startscene.cpp">
       <Filter>src\patterns</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CRunner.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\patterns\startscene.h">
       <Filter>src\patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CRunner.h">
+      <Filter>src\midwork</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

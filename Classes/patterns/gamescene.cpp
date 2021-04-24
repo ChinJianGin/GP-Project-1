@@ -17,6 +17,7 @@ GameScene::GameScene()
 	_midobj = nullptr;
 	_boyRoot = nullptr;
 	_irunid = _ijumpid = -1;
+	_watsonRunner = nullptr;
 }
 
 GameScene::~GameScene()
@@ -85,13 +86,19 @@ bool GameScene::init()
 	// 加入跑步小男生
 	_boyRoot = CSLoader::createNode("boyrunning.csb"); //讀入節點(node)資料
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("boyrun"));
-	_boyRoot->setPosition(loctag->getPosition());
-	loctag->setVisible(false);
-	this->addChild(_boyRoot, 5); // 加入 scence 中, 放在中景的前面
-	_boyAction = CSLoader::createTimeline("boyrunning.csb"); // 讀取動畫並建立【動作】
-	_boyAction->gotoFrameAndPlay(0, 55, true); // 撥放指定範圍內的動畫, true 代表重複撥放
-	_boyAction->setTimeSpeed(1.0f); // 一倍速
-	_boyRoot->runAction(_boyAction); // 讓 sprite 執行該【動作】
+	//_boyRoot->setPosition(loctag->getPosition());
+	//loctag->setVisible(false);
+	//this->addChild(_boyRoot, 5); // 加入 scence 中, 放在中景的前面
+	//_boyAction = CSLoader::createTimeline("boyrunning.csb"); // 讀取動畫並建立【動作】
+	//_boyAction->gotoFrameAndPlay(0, 55, true); // 撥放指定範圍內的動畫, true 代表重複撥放
+	//_boyAction->setTimeSpeed(1.0f); // 一倍速
+	//_boyRoot->runAction(_boyAction); // 讓 sprite 執行該【動作】
+
+	_watsonRunner = new CRunner();
+	_watsonRunner->playerInit(*loctag, *this);
+	//_watsonRunner->doRun();
+	//_watsonRunner->doJump();
+	_watsonRunner->doRoll();
 
 	//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));
@@ -128,7 +135,7 @@ void GameScene::update(float dt)
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
 		this->unschedule(schedule_selector(GameScene::update)); 
-		_boyAction->stop(); // 停止跑步小男生的動畫撥放
+		//_boyAction->stop(); // 停止跑步小男生的動畫撥放
 		SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("gamescene.plist");
 		TransitionFade* pageTurn = TransitionFade::create(1.0F, StartScene::createScene());
 		Director::getInstance()->replaceScene(pageTurn);
