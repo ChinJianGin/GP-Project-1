@@ -97,12 +97,11 @@ bool GameScene::init()
 
 	_watsonRunner = new CRunner();
 	_watsonRunner->characterInit(*loctag, *this);
-	_watsonRunner->doRun();
+	_watsonRunner->doJumpHigh();
 
-	_normalEnemy = new speedEnemy();
+	_normalEnemy = new normalEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
-	//_characterRunner->doJump();
-	//_characterRunner->doRoll();
+	
 
 	//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));

@@ -21,12 +21,16 @@ public:
 		CCharacter::_characterRunAct->setTimeSpeed(1.0f);
 
 		CCharacter::_characterJumpAct = CSLoader::createTimeline("watsonrun.csb");
-		CCharacter::_characterJumpAct->gotoFrameAndPlay(40, 78, false);
+		CCharacter::_characterJumpAct->gotoFrameAndPlay(85, 143, false);
 		CCharacter::_characterJumpAct->setTimeSpeed(1.0f);
 
 		CCharacter::_characterRollAct = CSLoader::createTimeline("watsonrun.csb");
-		CCharacter::_characterRollAct->gotoFrameAndPlay(85, 143, false);
+		CCharacter::_characterRollAct->gotoFrameAndPlay(40, 78, false);
 		CCharacter::_characterRollAct->setTimeSpeed(1.0f);
+
+		CCharacter::_characterJumpHighAct = CSLoader::createTimeline("watsonrun.csb");
+		CCharacter::_characterJumpHighAct->gotoFrameAndPlay(155, 221, false);
+		CCharacter::_characterJumpHighAct->setTimeSpeed(1.0f);
 
 		CCharacter::_neutralFace = CCharacter::_characterRoot->getChildByName("neutral_face");
 		CCharacter::_happyFace = CCharacter::_characterRoot->getChildByName("happy_face");

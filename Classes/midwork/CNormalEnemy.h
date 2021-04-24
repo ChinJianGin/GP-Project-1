@@ -9,8 +9,8 @@ USING_NS_CC;
 class normalEnemy : public CEnemy
 {
 private:
-
-public:
+	
+public:	
 	void characterInit(Sprite& loctag, Scene& theScene) {
 		CCharacter::_characterRoot = CSLoader::createNode("normalenemy.csb");
 		CCharacter::_characterRoot->setPosition(loctag.getPosition());
@@ -21,5 +21,7 @@ public:
 		CCharacter::_characterRunAct->gotoFrameAndPlay(0, 48, true);
 		CCharacter::_characterRunAct->setTimeSpeed(1.0f);
 		CCharacter::_characterRoot->runAction(CCharacter::_characterRunAct);
+		
+		_myDifficulty = CEnemy::LV::NORMAL;
 	}
 };

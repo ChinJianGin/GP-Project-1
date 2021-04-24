@@ -32,13 +32,22 @@ USING_NS_CC;
 //}
 
 void CCharacter::doRun() {
+	_characterJumpAct->stop();
+	_characterRollAct->stop();
 	_characterRoot->runAction(_characterRunAct);
 }
 
 void CCharacter::doJump() {
+	_characterRunAct->stop();
 	_characterRoot->runAction(_characterJumpAct);
 }
 
 void CCharacter::doRoll() {
+	_characterRunAct->stop();
 	_characterRoot->runAction(_characterRollAct);
+}
+
+void CCharacter::doJumpHigh() {
+	_characterRunAct->stop();
+	_characterRoot->runAction(_characterJumpHighAct);
 }

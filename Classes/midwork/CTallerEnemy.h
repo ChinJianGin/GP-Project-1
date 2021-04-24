@@ -21,5 +21,7 @@ public:
 		CCharacter::_characterRunAct->gotoFrameAndPlay(0, 24, true);
 		CCharacter::_characterRunAct->setTimeSpeed(1.0f);
 		CCharacter::_characterRoot->runAction(CCharacter::_characterRunAct);
+
+		_myDifficulty = CEnemy::LV::TALLER;
 	}
 };
