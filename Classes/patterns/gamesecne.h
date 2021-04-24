@@ -9,6 +9,8 @@
 #include "midwork/CRunner.h"
 #include "midwork/CEnemy.h"
 #include "midwork/CNormalEnemy.h"
+#include "midwork/CTallerEnemy.h"
+#include "midwork/CSpeedEnemy.h"
 class GameScene : public cocos2d::Scene
 {
 public:

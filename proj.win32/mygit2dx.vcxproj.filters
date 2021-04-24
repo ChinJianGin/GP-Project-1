@@ -131,6 +131,12 @@
     <ClInclude Include="..\Classes\midwork\CNormalEnemy.h">
       <Filter>src\midwork</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CTallerEnemy.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CSpeedEnemy.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

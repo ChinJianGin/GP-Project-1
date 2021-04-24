@@ -99,7 +99,7 @@ bool GameScene::init()
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
 
-	_normalEnemy = new normalEnemy();
+	_normalEnemy = new speedEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
 	//_characterRunner->doJump();
 	//_characterRunner->doRoll();
