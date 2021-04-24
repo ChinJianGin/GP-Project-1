@@ -18,6 +18,7 @@ GameScene::GameScene()
 	_boyRoot = nullptr;
 	_irunid = _ijumpid = -1;
 	_watsonRunner = nullptr;
+	_normalEnemy = nullptr;
 }
 
 GameScene::~GameScene()
@@ -95,10 +96,13 @@ bool GameScene::init()
 	//_boyRoot->runAction(_boyAction); // 讓 sprite 執行該【動作】
 
 	_watsonRunner = new CRunner();
-	_watsonRunner->playerInit(*loctag, *this);
-	//_watsonRunner->doRun();
-	//_watsonRunner->doJump();
-	_watsonRunner->doRoll();
+	_watsonRunner->characterInit(*loctag, *this);
+	_watsonRunner->doRun();
+
+	_normalEnemy = new normalEnemy();
+	_normalEnemy->characterInit(*loctag, *this);
+	//_characterRunner->doJump();
+	//_characterRunner->doRoll();
 
 	//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));

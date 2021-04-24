@@ -66,7 +66,10 @@
     <ClCompile Include="..\Classes\patterns\startscene.cpp">
       <Filter>src\patterns</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\midwork\CRunner.cpp">
+    <ClCompile Include="..\Classes\midwork\faceState.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CCharacter.cpp">
       <Filter>src\midwork</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,7 +116,19 @@
     <ClInclude Include="..\Classes\patterns\startscene.h">
       <Filter>src\patterns</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\midwork\faceState.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CCharacter.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\midwork\CRunner.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CEnemy.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CNormalEnemy.h">
       <Filter>src\midwork</Filter>
     </ClInclude>
   </ItemGroup>

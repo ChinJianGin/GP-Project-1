@@ -5,7 +5,10 @@
 #include "cocostudio/CocoStudio.h"
 #include "Common/CButton.h"
 #include "Common/CMiddleObject.h"
+#include "midwork/CCharacter.h"
 #include "midwork/CRunner.h"
+#include "midwork/CEnemy.h"
+#include "midwork/CNormalEnemy.h"
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -38,5 +41,7 @@ private:
 
     CMiddleObject * _midobj;
 
-    CRunner* _watsonRunner;
+    CCharacter* _watsonRunner;
+
+    CEnemy* _normalEnemy;
 };
