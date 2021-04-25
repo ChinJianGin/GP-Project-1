@@ -19,6 +19,7 @@ GameScene::GameScene()
 	_irunid = _ijumpid = -1;
 	_watsonRunner = nullptr;
 	_normalEnemy = nullptr;
+	_score = nullptr;
 }
 
 GameScene::~GameScene()
@@ -101,6 +102,9 @@ bool GameScene::init()
 
 	_normalEnemy = new tallerEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
+
+	_score = new CScoring();
+	_score->init(*_watsonRunner, *this, visibleSize, origin);
 	
 
 	//加入可動的中景

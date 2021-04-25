@@ -72,6 +72,9 @@
     <ClCompile Include="..\Classes\midwork\CCharacter.cpp">
       <Filter>src\midwork</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CScoring.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -135,6 +138,9 @@
       <Filter>src\midwork</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\midwork\CSpeedEnemy.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\CScoring.h">
       <Filter>src\midwork</Filter>
     </ClInclude>
   </ItemGroup>

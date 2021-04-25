@@ -16,7 +16,7 @@ private:
 	int _hisScore[10];
 	std::vector<int> _score;
 public:
-	void init(Node& player,Node& theScene);
+	void init(Node& player,Node& theScene, Size& visibleSize, Vec2& origin);
 	void ranking();
 	void pointCal();
 	void resetScore();

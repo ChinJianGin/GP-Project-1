@@ -11,6 +11,7 @@
 #include "midwork/CNormalEnemy.h"
 #include "midwork/CTallerEnemy.h"
 #include "midwork/CSpeedEnemy.h"
+#include "midwork/CScoring.h"
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -46,4 +47,6 @@ private:
     CCharacter* _watsonRunner;
 
     CEnemy* _normalEnemy;
+
+    CScoring* _score;
 };
