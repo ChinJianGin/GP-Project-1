@@ -8,7 +8,8 @@ USING_NS_CC;
 
 class CRunner : public CCharacter {
 private:
-
+	enum class _playerState{DEAD,ALIVE};
+	CRunner::_playerState _nowState;
 public:
 	void characterInit(Sprite& loctag, Node& theScene) {
 		_loctag = &loctag;
@@ -36,5 +37,10 @@ public:
 		_neutralFace = _characterRoot->getChildByName("neutral_face");
 		_happyFace = _characterRoot->getChildByName("happy_face");
 		_sadFace = _characterRoot->getChildByName("sad_face");
+
+		_nowState = CRunner::_playerState::ALIVE;
+		_HP = 10;
 	}
+	void update();
+	CRunner::_playerState getNowState();
 };

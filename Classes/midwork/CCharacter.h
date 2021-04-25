@@ -18,6 +18,8 @@ protected:
 	cocostudio::timeline::ActionTimeline* _characterJumpAct;
 	cocostudio::timeline::ActionTimeline* _characterRollAct;
 	cocostudio::timeline::ActionTimeline* _characterJumpHighAct;
+
+	int _HP;
 public:
 	void virtual characterInit(Sprite& loctag, Node& theScene) = 0;
 
