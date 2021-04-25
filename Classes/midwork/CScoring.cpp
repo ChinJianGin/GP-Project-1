@@ -38,3 +38,7 @@ void CScoring::ranking() {
 void CScoring::resetScore() {
 	_nowScore = 0;
 }
+
+int CScoring::getNowScore() {
+	return _nowScore;
+}
