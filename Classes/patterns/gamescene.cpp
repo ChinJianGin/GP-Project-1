@@ -99,7 +99,7 @@ bool GameScene::init()
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
 
-	_normalEnemy = new speedEnemy();
+	_normalEnemy = new tallerEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
 	
 
@@ -157,6 +157,7 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 		if(_runbtn->touchesBegin(touchLoc)){
 			_bBoyRun = true;
 			_irunid = touchId;
+			_watsonRunner->doRun();
 		}
 		else if (_jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
@@ -216,6 +217,7 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 			_jumpbtn->touchesEnded(touchLoc);
 			_bBoyJump = false;
 			_irunid = -1;
+			_watsonRunner->doJumpHigh();
 		}
 		else {
 			if ( _returnbtn->touchesEnded(touchLoc) ) _bToStartScene = true;

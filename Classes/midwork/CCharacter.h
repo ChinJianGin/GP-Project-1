@@ -13,12 +13,13 @@ protected:
 	Node* _neutralFace;
 	Node* _happyFace;
 	Node* _sadFace;
+	Sprite* _loctag;
 	cocostudio::timeline::ActionTimeline* _characterRunAct;
 	cocostudio::timeline::ActionTimeline* _characterJumpAct;
 	cocostudio::timeline::ActionTimeline* _characterRollAct;
 	cocostudio::timeline::ActionTimeline* _characterJumpHighAct;
 public:
-	void virtual characterInit(Sprite& loctag, Scene& theScene) = 0;
+	void virtual characterInit(Sprite& loctag, Node& theScene) = 0;
 
 	void doRun();
 	void doJump();

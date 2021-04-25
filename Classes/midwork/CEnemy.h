@@ -11,7 +11,7 @@ class CEnemy : public CCharacter
 public:
 	enum class LV { NORMAL = 1, TALLER, SPEED };
 	CEnemy::LV _myDifficulty;
-	void virtual characterInit(Sprite& loctag, Scene& theScene) = 0;
+	void virtual characterInit(Sprite& loctag, Node& theScene) = 0;
 protected:
 	
 };
