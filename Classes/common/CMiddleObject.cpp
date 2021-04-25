@@ -26,20 +26,20 @@ void CMiddleObject::update(float dt)  // 根據時間自己移動
 {
 	//目前的移動設定移動的距離
 	Point pt1 = _road0->getPosition();
-	pt1.x -= dt * MOVESPEED;
-	if ( pt1.x <= -640) {
+	pt1.x += dt * MOVESPEED;
+	if ( pt1.x >= 1920) {
 		// 將道路移動到 +1280+640 ，但必須扣除本身超過 -640 多的部分，所以是 2 * 1280 + pt1.x
-		pt1.x = 2 * 1280 + pt1.x;
+		pt1.x = pt1.x -2 * 1280;
 		// 更新物件的顯示內容
 		resetObj(0);
 	}
 	_road0->setPosition(pt1);
 
 	pt1 = _road1->getPosition();
-	pt1.x -= dt * MOVESPEED;
-	if (pt1.x <= -640) {
+	pt1.x += dt * MOVESPEED;
+	if (pt1.x >= 1920) {
 		// 將道路移動到 +1280+640 ，但必須扣除本身超過 -640 多的部分，所以是 2 * 1280 + pt1.x
-		pt1.x = 2 * 1280 + pt1.x;
+		pt1.x = pt1.x - 2 * 1280;
 		// 更新物件的顯示內容
 		resetObj(1);
 	}
@@ -53,7 +53,7 @@ void  CMiddleObject::init(const std::string& roadname, const std::string& csbnam
 	_road0 = Sprite::createWithSpriteFrameName(roadname);
 	_road1 = Sprite::createWithSpriteFrameName(roadname);
 	_road0->setPosition(locPt);
-	_road1->setPosition(locPt+Point(1280,0));
+	_road1->setPosition(locPt+Point(-1280,0));
 	parent.addChild(_road0, 3); // 高於背景層
 	parent.addChild(_road1, 3); // 高於背景層
 
