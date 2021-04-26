@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
 #include "Common/CButton.h"
@@ -12,6 +13,7 @@
 #include "midwork/CTallerEnemy.h"
 #include "midwork/CSpeedEnemy.h"
 #include "midwork/CScoring.h"
+#include "midwork/audioController.h"
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -49,4 +51,8 @@ private:
     CEnemy* _normalEnemy;
 
     CScoring* _score;
+
+    audioController* _audio;
+
+    cocos2d::ui::LoadingBar* _healthbar_1;
 };

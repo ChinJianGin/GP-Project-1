@@ -143,6 +143,9 @@
     <ClInclude Include="..\Classes\midwork\CScoring.h">
       <Filter>src\midwork</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\midwork\audioController.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

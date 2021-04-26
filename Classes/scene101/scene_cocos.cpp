@@ -27,7 +27,7 @@
 //#include "SimpleAudioEngine.h"
 
 #define EXERCISE 2
-//#define Audio_Example  1
+#define Audio_Example  1
 #define Sprite_Example 1
 #define Button_Example 1
 //#define TTFBMF_Example 1

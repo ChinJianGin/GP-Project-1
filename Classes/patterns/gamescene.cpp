@@ -20,6 +20,8 @@ GameScene::GameScene()
 	_watsonRunner = nullptr;
 	_normalEnemy = nullptr;
 	_score = nullptr;
+	_healthbar_1 = nullptr;
+	_audio = nullptr;
 }
 
 GameScene::~GameScene()
@@ -96,16 +98,21 @@ bool GameScene::init()
 	//_boyAction->setTimeSpeed(1.0f); // 一倍速
 	//_boyRoot->runAction(_boyAction); // 讓 sprite 執行該【動作】
 
+	_audio = new audioController();
+
 	_watsonRunner = new CRunner();
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
 
-	_normalEnemy = new tallerEnemy();
+	_normalEnemy = new speedEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
 
 	_score = new CScoring();
 	_score->init(*_watsonRunner, *this, visibleSize, origin);
 	
+	/*_healthbar_1 = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("healthbar"));
+	_healthbar_1->setDirection(cocos2d::ui::LoadingBar::Direction::LEFT);
+	_healthbar_1->setPercent(50);*/
 
 	//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));

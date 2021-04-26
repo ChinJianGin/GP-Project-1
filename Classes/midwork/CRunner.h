@@ -8,6 +8,7 @@ USING_NS_CC;
 
 class CRunner : public CCharacter {
 private:
+	int _MAX_HP, _NOW_HP;
 	enum class _playerState{DEAD,ALIVE};
 	CRunner::_playerState _nowState;
 public:
@@ -39,7 +40,7 @@ public:
 		_sadFace = _characterRoot->getChildByName("sad_face");
 
 		_nowState = CRunner::_playerState::ALIVE;
-		_HP = 10;
+		_MAX_HP = _NOW_HP = 10;
 	}
 	void update();
 	CRunner::_playerState getNowState();
