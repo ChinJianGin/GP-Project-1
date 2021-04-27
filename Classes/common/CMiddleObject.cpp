@@ -3,7 +3,7 @@
 #define X_OFFSET  100
 #define SHIFTX(X) ((rand()%(2*(X)))- (X))
 #define MOVESPEED 125
-//#define ADD_ENEMY 1
+#define ADD_ENEMY 1
 
 USING_NS_CC;
 using namespace cocostudio::timeline;
@@ -68,10 +68,10 @@ void  CMiddleObject::init(const std::string& roadname, const std::string& csbnam
 	_road1obj[2] = CSLoader::createNode("./patterns/midobj.csb");
 
 #ifdef ADD_ENEMY
-	_road0ene[0] = new normalEnemy(); _road0ene[0]->characterInit(parent);
-	_road1ene[0] = new tallerEnemy(); _road0ene[1]->characterInit(parent);
-	_road0ene[1] = new normalEnemy(); _road1ene[0]->characterInit(parent);
-	_road1ene[1] = new tallerEnemy(); _road1ene[1]->characterInit(parent);
+	_road0ene[0] = new normalEnemy(); _road0ene[0]->characterInit(*_road0, parent);
+	_road0ene[1] = new tallerEnemy(); _road0ene[1]->characterInit(*_road0, parent);
+	_road1ene[0] = new normalEnemy(); _road1ene[0]->characterInit(*_road1, parent);
+	_road1ene[1] = new tallerEnemy(); _road1ene[1]->characterInit(*_road1, parent);
 #endif // ADD_ENEMY
 	
 	for (int i = 1; i <= 6; i++) // 將三個生成點中的物件都設定 false
@@ -87,21 +87,21 @@ void  CMiddleObject::init(const std::string& roadname, const std::string& csbnam
 		(_road1obj[2]->getChildByName(objname))->setVisible(false);
 	}
 	// 將 _road0obj 加入 _road0，並設定生成的位置
-	_road0->addChild(_road0obj[0], -1); _road0obj[0]->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET),0));
-	_road0->addChild(_road0obj[1], -1); _road0obj[1]->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
-	_road0->addChild(_road0obj[2], -1); _road0obj[2]->setPosition(genLoc[2] + Point(SHIFTX(X_OFFSET), 0));
+	_road0->addChild(_road0obj[0], -2); _road0obj[0]->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET),0));
+	_road0->addChild(_road0obj[1], -2); _road0obj[1]->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
+	_road0->addChild(_road0obj[2], -2); _road0obj[2]->setPosition(genLoc[2] + Point(SHIFTX(X_OFFSET), 0));
 #ifdef ADD_ENEMY
-	_road0ene[0]->getRoot()->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 0));
-	_road1ene[1]->getRoot()->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
+	_road0ene[0]->getRoot()->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 80));
+	_road0ene[1]->getRoot()->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 80));
 #endif // ADD_ENEMY	
 	resetObj(0);
 	// 將 _road1obj 加入 _road1，並設定生成的位置
-	_road1->addChild(_road1obj[0], -1); _road1obj[0]->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 0));
-	_road1->addChild(_road1obj[1], -1); _road1obj[1]->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
-	_road1->addChild(_road1obj[2], -1); _road1obj[2]->setPosition(genLoc[2] + Point(SHIFTX(X_OFFSET), 0));
+	_road1->addChild(_road1obj[0], -2); _road1obj[0]->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 0));
+	_road1->addChild(_road1obj[1], -2); _road1obj[1]->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
+	_road1->addChild(_road1obj[2], -2); _road1obj[2]->setPosition(genLoc[2] + Point(SHIFTX(X_OFFSET), 0));
 #ifdef ADD_ENEMY
-	_road0ene[0]->getRoot()->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 0));
-	_road1ene[1]->getRoot()->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 0));
+	_road1ene[0]->getRoot()->setPosition(genLoc[1] + Point(SHIFTX(X_OFFSET), 80));
+	_road1ene[1]->getRoot()->setPosition(genLoc[0] + Point(SHIFTX(X_OFFSET), 80));
 #endif // ADD_ENEMY	
 	resetObj(1);
 }

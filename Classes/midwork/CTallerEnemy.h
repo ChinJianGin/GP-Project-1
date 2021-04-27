@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 
+//#define SPAWN
+
 USING_NS_CC;
 
 class tallerEnemy : public CEnemy
@@ -13,10 +15,16 @@ private:
 public:
 	void characterInit(Sprite& loctag, Node& theScene) {
 		_characterRoot = CSLoader::createNode("tallerenemy.csb");
+#ifndef SPAWN
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
-		//_characterRoot->setVisible(false);
 		theScene.addChild(_characterRoot, 5);
+#else
+		_characterRoot->setVisible(false);
+		loctag.addChild(_characterRoot, 1);
+#endif // !SPAWN
+		
+		
 
 		_characterJumpAct = CSLoader::createTimeline("tallerenemy.csb");
 		_characterJumpAct->gotoFrameAndPlay(30, 58, false);
