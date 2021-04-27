@@ -15,12 +15,13 @@ public:
 		_characterRoot = CSLoader::createNode("normalenemy.csb");
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
+		//_characterRoot->setVisible(false);
 		theScene.addChild(_characterRoot, 5);
 
 		_characterJumpAct = CSLoader::createTimeline("normalenemy.csb");
 		_characterJumpAct->gotoFrameAndPlay(60, 108, false);
 		_characterJumpAct->setTimeSpeed(1.0f);
-		_characterRoot->runAction(_characterJumpAct);
+		//_characterRoot->runAction(_characterJumpAct);
 
 		_characterRunAct = CSLoader::createTimeline("normalenemy.csb");
 		_characterRunAct->gotoFrameAndPlay(0, 48, true);

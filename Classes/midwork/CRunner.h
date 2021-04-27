@@ -19,6 +19,8 @@ public:
 		loctag.setVisible(false);
 		theScene.addChild(_characterRoot, 5);
 
+		_characterRect = Rect(loctag.getPosition().x - loctag.getContentSize().width / 2, loctag.getPosition().y - loctag.getContentSize().height / 2, loctag.getContentSize().width, loctag.getContentSize().height);
+
 		_characterRunAct = CSLoader::createTimeline("watsonrun.csb");
 		_characterRoot->runAction(_characterRunAct);		
 		_characterRunAct->setTimeSpeed(1.0f);
@@ -44,4 +46,7 @@ public:
 	}
 	void update();
 	CRunner::_playerState getNowState();
+	Rect getRect() {
+		return _characterRect;
+	};
 };

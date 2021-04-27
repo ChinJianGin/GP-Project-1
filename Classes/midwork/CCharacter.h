@@ -14,6 +14,7 @@ protected:
 	Node* _happyFace;
 	Node* _sadFace;
 	Sprite* _loctag;
+	Rect _characterRect;
 	cocostudio::timeline::ActionTimeline* _characterRunAct;
 	cocostudio::timeline::ActionTimeline* _characterJumpAct;
 	cocostudio::timeline::ActionTimeline* _characterRollAct;
@@ -22,10 +23,11 @@ protected:
 
 public:
 	void virtual characterInit(Sprite& loctag, Node& theScene) = 0;
-
+	//virtual Rect* getRect();
 	void doRun();
 	void doJump();
 	void doRoll();
 	void doJumpHigh();
+	Node* getRoot();
 };
 

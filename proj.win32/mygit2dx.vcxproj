@@ -154,6 +154,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\common\CButton.cpp" />
     <ClCompile Include="..\Classes\common\CMiddleObject.cpp" />
     <ClCompile Include="..\Classes\midwork\CCharacter.cpp" />
+    <ClCompile Include="..\Classes\midwork\CRunner.cpp" />
     <ClCompile Include="..\Classes\midwork\CScoring.cpp" />
     <ClCompile Include="..\Classes\midwork\faceState.cpp" />
     <ClCompile Include="..\Classes\patterns\CCommandPattern.cpp" />

@@ -46,7 +46,7 @@ private:
 
     CMiddleObject * _midobj;
 
-    CCharacter* _watsonRunner;
+    CRunner* _watsonRunner;
 
     CEnemy* _normalEnemy;
 

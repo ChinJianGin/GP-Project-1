@@ -75,6 +75,9 @@
     <ClCompile Include="..\Classes\midwork\CScoring.cpp">
       <Filter>src\midwork</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CRunner.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

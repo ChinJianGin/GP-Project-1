@@ -104,15 +104,19 @@ bool GameScene::init()
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
 
-	_normalEnemy = new speedEnemy();
+	_normalEnemy = new tallerEnemy();
 	_normalEnemy->characterInit(*loctag, *this);
 
 	_score = new CScoring();
 	_score->init(*_watsonRunner, *this, visibleSize, origin);
 	
-	/*_healthbar_1 = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("healthbar"));
+	/*loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("healthbar"));
+	loctag->setVisible(false);
+	_healthbar_1 = cocos2d::ui::LoadingBar::create("loadingbar.png", 100.0f);
 	_healthbar_1->setDirection(cocos2d::ui::LoadingBar::Direction::LEFT);
-	_healthbar_1->setPercent(50);*/
+	_healthbar_1->setPercent(100);
+	_healthbar_1->setPosition(loctag->getPosition());
+	this->addChild(_healthbar_1, 11);*/
 
 	//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));
@@ -170,10 +174,14 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 			_irunid = touchId;
 			_watsonRunner->doRun();
 		}
+		if (_watsonRunner->getRect().containsPoint(touchLoc))
+		{
+			log("%f",_watsonRunner->getRect().size.width);
+		}
 		else if (_jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
 			_ijumpid = touchId;
-		}
+		}		
 		else {
 			_returnbtn->touchesBegin(touchLoc);
 		}
