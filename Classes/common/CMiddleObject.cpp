@@ -2,7 +2,7 @@
 
 #define X_OFFSET  100
 #define SHIFTX(X) ((rand()%(2*(X)))- (X))
-#define MOVESPEED 125
+#define MOVESPEED 200
 //#define ADD_ENEMY 1
 
 USING_NS_CC;

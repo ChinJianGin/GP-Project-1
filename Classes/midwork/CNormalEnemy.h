@@ -20,22 +20,40 @@ public:
 		loctag.setVisible(false);
 		theScene.addChild(_characterRoot, 5);
 #else
-		_characterRoot->setVisible(false);
-		loctag.addChild(_characterRoot, 1);
+		//_characterRoot->setVisible(false);
+		theScene.addChild(_characterRoot, 4);
 #endif // SPAWN		
 		
 		
 
 		_characterJumpAct = CSLoader::createTimeline("normalenemy.csb");
-		_characterJumpAct->gotoFrameAndPlay(60, 108, false);
 		_characterJumpAct->setTimeSpeed(1.0f);
-		//_characterRoot->runAction(_characterJumpAct);
+		_characterRoot->runAction(_characterJumpAct);
 
-		_characterRunAct = CSLoader::createTimeline("normalenemy.csb");
-		_characterRunAct->gotoFrameAndPlay(0, 48, true);
+		_characterRunAct = CSLoader::createTimeline("normalenemy.csb");		
 		_characterRunAct->setTimeSpeed(1.0f);
 		_characterRoot->runAction(_characterRunAct);
 		
 		_myDifficulty = CEnemy::LV::NORMAL;
+	}
+	void doRun() 
+	{
+		_characterRunAct->gotoFrameAndPlay(0, 48, true);
+	}
+
+	void doJump() 
+	{
+		_characterRunAct->pause();
+		_characterJumpAct->gotoFrameAndPlay(60, 108, false);
+	}
+
+	void doRoll() 
+	{
+		
+	}
+
+	void doJumpHigh() 
+	{
+		
 	}
 };

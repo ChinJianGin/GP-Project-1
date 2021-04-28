@@ -19,23 +19,40 @@ public:
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
 #else
-		_characterRoot->setVisible(false);
+		//_characterRoot->setVisible(false);
 		theScene.addChild(_characterRoot, 5);		
 #endif // !SPAWN
 		
 		
 
-		_characterJumpAct = CSLoader::createTimeline("tallerenemy.csb");
-		_characterJumpAct->gotoFrameAndPlay(30, 58, false);
+		_characterJumpAct = CSLoader::createTimeline("tallerenemy-2.csb");
 		_characterJumpAct->setTimeSpeed(1.0f);
-		//_characterRoot->runAction(_characterJumpAct);
+		_characterRoot->runAction(_characterJumpAct);
 
-		_characterRunAct = CSLoader::createTimeline("tallerenemy.csb");
-		_characterRunAct->gotoFrameAndPlay(0, 24, true);
+		_characterRunAct = CSLoader::createTimeline("tallerenemy-2.csb");
 		_characterRunAct->setTimeSpeed(1.0f);
 		_characterRoot->runAction(CCharacter::_characterRunAct);
 
 		_myDifficulty = CEnemy::LV::TALLER;
 	}
+	void doRun()
+	{
+		_characterRunAct->gotoFrameAndPlay(0, 24, true);
+	}
 
+	void doJump()
+	{
+		_characterRunAct->pause();
+		_characterJumpAct->gotoFrameAndPlay(30, 58, false);
+	}
+
+	void doRoll()
+	{
+
+	}
+
+	void doJumpHigh()
+	{
+
+	}
 };

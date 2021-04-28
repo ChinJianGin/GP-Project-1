@@ -22,7 +22,7 @@ public:
 		_characterRect = Rect(loctag.getPosition().x - loctag.getContentSize().width / 2, loctag.getPosition().y - loctag.getContentSize().height / 2, loctag.getContentSize().width, loctag.getContentSize().height);
 
 		_characterRunAct = CSLoader::createTimeline("watsonrun.csb");
-		_characterRoot->runAction(_characterRunAct);		
+		_characterRoot->runAction(_characterRunAct);
 		_characterRunAct->setTimeSpeed(1.0f);
 
 		_characterJumpAct = CSLoader::createTimeline("watsonrun.csb");
@@ -45,6 +45,23 @@ public:
 		_MAX_HP = _NOW_HP = 10;
 	}
 	void update();
+
+	void doRun() {
+		_characterRunAct->gotoFrameAndPlay(0, 32, true);
+	}
+
+	void doJump() {
+		_characterJumpAct->gotoFrameAndPlay(72, 132, false);		
+	}
+
+	void doRoll() {
+		_characterRollAct->gotoFrameAndPlay(33, 71, false);
+	}
+
+	void doJumpHigh() {
+		_characterJumpHighAct->gotoFrameAndPlay(133, 201, false);
+	}
+	
 	CRunner::_playerState getNowState();
 	Rect getRect() {
 		return _characterRect;

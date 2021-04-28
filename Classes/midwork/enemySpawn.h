@@ -2,6 +2,8 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
+#include "midwork/CCharacter.h"
 #include "midwork/CEnemy.h"
 #include "midwork/CNormalEnemy.h"
 #include "midwork/CSpeedEnemy.h"

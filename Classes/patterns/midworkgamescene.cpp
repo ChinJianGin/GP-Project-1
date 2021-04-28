@@ -22,6 +22,7 @@ GameScene::GameScene()
 	_score = nullptr;
 	_healthbar_1 = nullptr;
 	_audio = nullptr;
+	_enemycontroller = nullptr;
 }
 
 GameScene::~GameScene()
@@ -108,8 +109,11 @@ bool GameScene::init()
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
 
-	_normalEnemy = new tallerEnemy();
-	_normalEnemy->characterInit(*loctag, *this);
+	/*_normalEnemy = new normalEnemy();
+	_normalEnemy->characterInit(*loctag, *this);*/
+
+	_enemycontroller = new enemySpawn();
+	_enemycontroller->init(*loctag, *this);
 
 	_score = new CScoring();
 	_score->init(*_watsonRunner, *this, visibleSize, origin);
@@ -152,9 +156,10 @@ void GameScene::resetMiddle(int n) // 重新產生前景1 中物件的位置與狀態
 void GameScene::update(float dt)
 {
 	// 每秒前景往左移動 MOVESPEED 個PIXEL
-	if (_bBoyRun) {
+	/*if (_bBoyRun) {*/
 		_midobj->update(dt);
-	}
+		_enemycontroller->update(dt);
+	//}
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
 		this->unschedule(schedule_selector(GameScene::update)); 
@@ -179,11 +184,11 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 			_irunid = touchId;
 			_watsonRunner->doRun();
 		}
-		if (_watsonRunner->getRect().containsPoint(touchLoc))
+		/*if (_watsonRunner->getRect().containsPoint(touchLoc))
 		{
 			log("%f",_watsonRunner->getRect().size.width);
 			log("%f", _healthbar_1->getPosition());
-		}
+		}*/
 		else if (_jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
 			_ijumpid = touchId;

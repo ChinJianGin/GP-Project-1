@@ -84,6 +84,9 @@
     <ClCompile Include="..\Classes\patterns\gamescene.cpp">
       <Filter>src\patterns</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CNormalEnemy.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

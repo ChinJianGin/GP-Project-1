@@ -14,6 +14,8 @@
 #include "midwork/CSpeedEnemy.h"
 #include "midwork/CScoring.h"
 #include "midwork/audioController.h"
+#include "midwork/enemySpawn.h"
+
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -53,6 +55,8 @@ private:
     CScoring* _score;
 
     audioController* _audio;
+
+    enemySpawn* _enemycontroller;
 
     cocos2d::ui::LoadingBar* _healthbar_1;
 };

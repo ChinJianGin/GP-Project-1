@@ -6,32 +6,21 @@
 
 USING_NS_CC;
 
-
-
-
-
-void CCharacter::doRun() {
-	//_characterJumpAct->stop();
-	//_characterRollAct->stop();
-	_characterRunAct->gotoFrameAndPlay(0, 32, true);
-	
-}
-
-void CCharacter::doJump() {
-	//_characterRunAct->stop();
-	_characterJumpAct->gotoFrameAndPlay(72, 132, false);
-}
-
-void CCharacter::doRoll() {
-	//_characterRunAct->stop();
-	_characterRollAct->gotoFrameAndPlay(33, 71, false);
-}
-
-void CCharacter::doJumpHigh() {
-	//_characterRunAct->stop();
-	_characterJumpHighAct->gotoFrameAndPlay(133, 201, false);
-	
-}
+//void CCharacter::doRun() {
+//	_characterRoot->runAction(_characterRunAct);
+//}
+//
+//void CCharacter::doJump() {
+//	_characterRoot->runAction(_characterJumpAct);
+//}
+//
+//void CCharacter::doRoll() {
+//	_characterRoot->runAction(_characterRollAct);
+//}
+//
+//void CCharacter::doJumpHigh() {
+//	_characterRoot->runAction(_characterJumpHighAct);	
+//}
 
 Node* CCharacter::getRoot()
 {
