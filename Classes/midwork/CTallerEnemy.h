@@ -18,10 +18,9 @@ public:
 #ifndef SPAWN
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
-		theScene.addChild(_characterRoot, 5);
 #else
 		_characterRoot->setVisible(false);
-		loctag.addChild(_characterRoot, 1);
+		theScene.addChild(_characterRoot, 5);		
 #endif // !SPAWN
 		
 		

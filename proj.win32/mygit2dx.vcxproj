@@ -156,11 +156,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\midwork\CCharacter.cpp" />
     <ClCompile Include="..\Classes\midwork\CRunner.cpp" />
     <ClCompile Include="..\Classes\midwork\CScoring.cpp" />
+    <ClCompile Include="..\Classes\midwork\enemySpawn.cpp" />
     <ClCompile Include="..\Classes\midwork\faceState.cpp" />
     <ClCompile Include="..\Classes\patterns\CCommandPattern.cpp" />
     <ClCompile Include="..\Classes\patterns\CMoveableObject.cpp" />
     <ClCompile Include="..\Classes\patterns\CSimpleCharacter.cpp" />
     <ClCompile Include="..\Classes\patterns\gamescene.cpp" />
+    <ClCompile Include="..\Classes\patterns\midworkgamescene.cpp" />
     <ClCompile Include="..\Classes\patterns\scene_patterns.cpp" />
     <ClCompile Include="..\Classes\patterns\startscene.cpp" />
     <ClCompile Include="..\Classes\scene101\bean01.cpp" />
@@ -181,11 +183,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\midwork\CScoring.h" />
     <ClInclude Include="..\Classes\midwork\CSpeedEnemy.h" />
     <ClInclude Include="..\Classes\midwork\CTallerEnemy.h" />
+    <ClInclude Include="..\Classes\midwork\enemySpawn.h" />
     <ClInclude Include="..\Classes\midwork\faceState.h" />
     <ClInclude Include="..\Classes\patterns\CCommandPattern.h" />
     <ClInclude Include="..\Classes\patterns\CMoveableObject.h" />
     <ClInclude Include="..\Classes\patterns\CSimpleCharacter.h" />
     <ClInclude Include="..\Classes\patterns\gamesecne.h" />
+    <ClInclude Include="..\Classes\patterns\midworkgamesecne.h" />
     <ClInclude Include="..\Classes\patterns\scene_patterns.h" />
     <ClInclude Include="..\Classes\patterns\startscene.h" />
     <ClInclude Include="..\Classes\scene101\bean01.h" />

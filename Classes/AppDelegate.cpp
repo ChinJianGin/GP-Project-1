@@ -31,6 +31,7 @@
 #include "scene101/scene_cocos.h"
 #include "patterns/scene_patterns.h"
 #include "patterns/startscene.h"
+#include "patterns/midworkgamesecne.h"
 
 #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -138,7 +139,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 //  auto scene = Scene102::createScene();
 //  auto scene = SceneCocos::createScene();
 //  auto scene = ScenePatterns::createScene();
-  auto scene = StartScene::createScene();
+//  auto scene = StartScene::createScene();
+    auto scene = GameScene::createScene();
     director->runWithScene(scene); // 設定 director 從這個 scene 開始執行
 
     //  Director::getInstance()->replaceScene(scene); // 這個 API 只能用在 Scene 對 Scene 的切換上

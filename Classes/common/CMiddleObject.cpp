@@ -3,7 +3,7 @@
 #define X_OFFSET  100
 #define SHIFTX(X) ((rand()%(2*(X)))- (X))
 #define MOVESPEED 125
-#define ADD_ENEMY 1
+//#define ADD_ENEMY 1
 
 USING_NS_CC;
 using namespace cocostudio::timeline;
@@ -14,8 +14,6 @@ CMiddleObject::CMiddleObject()
 	_road1 = nullptr; _road0 = nullptr;
 	_road0obj[0] = _road0obj[1] = _road0obj[2] = nullptr;
 	_road1obj[0] = _road1obj[1] = _road1obj[2] = nullptr;
-	_road0ene[0] = _road0ene[1] = nullptr;
-	_road1ene[0] = _road1ene[1] = nullptr;
 	_iroad0on[0] = _iroad0on[1] = _iroad0on[2] = 1;
 	_iroad1on[0] = _iroad1on[1] = _iroad1on[2] = 1;
 }

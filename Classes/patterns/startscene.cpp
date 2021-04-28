@@ -1,5 +1,5 @@
 #include ".\patterns\startscene.h"
-#include ".\patterns\gamesecne.h"
+#include ".\patterns\midworkgamesecne.h"
 
 
 USING_NS_CC;

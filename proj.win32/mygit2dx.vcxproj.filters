@@ -57,9 +57,6 @@
     <ClCompile Include="..\Classes\patterns\CSimpleCharacter.cpp">
       <Filter>src\patterns</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\patterns\gamescene.cpp">
-      <Filter>src\patterns</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\patterns\scene_patterns.cpp">
       <Filter>src\patterns</Filter>
     </ClCompile>
@@ -77,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\midwork\CRunner.cpp">
       <Filter>src\midwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\midwork\enemySpawn.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\patterns\midworkgamescene.cpp">
+      <Filter>src\patterns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\patterns\gamescene.cpp">
+      <Filter>src\patterns</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +119,6 @@
     <ClInclude Include="..\Classes\patterns\CSimpleCharacter.h">
       <Filter>src\patterns</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\patterns\gamesecne.h">
-      <Filter>src\patterns</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\patterns\scene_patterns.h">
       <Filter>src\patterns</Filter>
     </ClInclude>
@@ -148,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\midwork\audioController.h">
       <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\midwork\enemySpawn.h">
+      <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\patterns\midworkgamesecne.h">
+      <Filter>src\patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\patterns\gamesecne.h">
+      <Filter>src\patterns</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
