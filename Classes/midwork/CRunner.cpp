@@ -78,7 +78,7 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 			_fjtime = 0;
 			_characterRoot->setPosition(_characterRoot->getPosition().x, _nowPos.y);
 			whichAction = 0;
-			theButton.setEnabled(true);
+			//theButton.setEnabled(true);
 		}
 	}
 

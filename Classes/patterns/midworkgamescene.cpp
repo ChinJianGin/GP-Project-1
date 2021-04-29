@@ -12,7 +12,7 @@ USING_NS_CC;
 GameScene::GameScene()
 {
 	_returnbtn = _runbtn = _jumpbtn = _rollbtn = _whichbtn = nullptr;
-	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = false;
+	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = _resetJump = _resetRoll = false;
 	_boyAction = nullptr;
 	_midobj = nullptr;
 	_boyRoot = nullptr;
@@ -24,7 +24,7 @@ GameScene::GameScene()
 	_audio = nullptr;
 	_enemycontroller = nullptr;
 	_actionID = 0;
-	_chargeTime = 0.0f;
+	_chargeTime = _timer1 = _timer2 = 0.0f;
 }
 
 GameScene::~GameScene()
@@ -168,17 +168,43 @@ void GameScene::resetMiddle(int n) // 重新產生前景1 中物件的位置與狀態
 void GameScene::update(float dt)
 {
 	// 每秒前景往左移動 MOVESPEED 個PIXEL
-	/*if (_bBoyRun) {*/
-		_midobj->update(dt);
-		_enemycontroller->update(dt);
-		_watsonRunner->update(dt, _boypt, _actionID, *_whichbtn);
+	/*if (_bBoyRun) {*///}
+	_midobj->update(dt);
+	_enemycontroller->update(dt);
+	_watsonRunner->update(dt, _boypt, _actionID, *_whichbtn);
 		//log("%f",_watsonRunner->getRoot()->getPosition().y);
 		//log("%f", _chargeTime);
-		if (_bBoyJump)
+	if (_bBoyJump)
+	{
+		_chargeTime += dt;
+	}
+
+	if (_resetRoll)
+	{
+		_timer1 += dt;
+		log("_timer = %f", _timer1);
+		if (_timer1 >= 2)
 		{
-			_chargeTime += dt;
+			_watsonRoll = false;
 		}
-	//}
+		if (_timer1 >= 6.0f)
+		{
+			_timer1 = 0.0f;
+			_resetRoll = false;
+			_rollbtn->setEnabled(true);
+		}
+	}
+
+	if (_resetJump)
+	{
+		_timer2 += dt;
+		if (_timer2 >= 1.0f)
+		{
+			_timer2 = 0;
+			_resetJump = false;
+		}
+	}
+
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
 		this->unschedule(schedule_selector(GameScene::update)); 
@@ -203,13 +229,14 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 			_irunid = touchId;
 			_watsonRunner->doRun();
 		}
-		else*/ if (_jumpbtn->touchesBegin(touchLoc)) {
+		else*/ if (!_watsonRoll && _jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
 			_ijumpid = touchId;
 			_boypt = _watsonRunner->getRoot()->getPosition();
 		}
-		else if (_rollbtn->touchesBegin(touchLoc)) {
+		else if (!_resetJump && !_bBoyJump && _rollbtn->touchesBegin(touchLoc)) {
 			log("roll");
+			_resetRoll = true;
 			_watsonRoll = true;
 			_irollid = touchId;
 			_whichbtn = _rollbtn;
@@ -277,12 +304,14 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 			_irunid = -1;
 			if (_chargeTime > 0.5f) 
 			{
+				_resetJump = true;
 				_whichbtn = _jumpbtn;
 				_actionID = _watsonRunner->doJumpHigh();
 				_chargeTime = 0;
 			}
 			else 
 			{
+				_resetJump = true;
 				_whichbtn = _jumpbtn;
 				_actionID = _watsonRunner->doJump();
 				_chargeTime = 0;
@@ -291,7 +320,6 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 		}
 		else if ((_irollid == touchId) && _watsonRoll) {
 			_rollbtn->touchesEnded(touchLoc);
-			_watsonRoll = false;
 			_irollid = -1;
 		}
 		else {

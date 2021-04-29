@@ -39,10 +39,11 @@ public:
 
 private:
     CButton* _returnbtn, *_runbtn, *_jumpbtn, *_rollbtn, *_whichbtn;
-    bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll;
+    bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll, _resetJump, _resetRoll;
     int _irunid, _ijumpid, _irollid;
     int _actionID;
     float _chargeTime;
+    float _timer1,_timer2;
 
     // ¨¤¦âªº±±¨î
     cocos2d::Node* _boyRoot;
