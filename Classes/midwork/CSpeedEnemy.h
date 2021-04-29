@@ -36,25 +36,26 @@ public:
 
 		_myDifficulty = CEnemy::LV::SPEED;
 	}
-	void doRun()
+	int doRun()
 	{
-		
 		_characterJumpAct->gotoFrameAndPlay(0, 12, true);
+		return 1;
 	}
 
-	void doJump()
+	int doJump()
 	{
 		_characterRunAct->pause();
 		_characterRunAct->gotoFrameAndPlay(20, 32, false);
+		return 2;
 	}
 
-	void doRoll()
+	int doRoll()
 	{
-
+		return 3;
 	}
 
-	void doJumpHigh()
+	int doJumpHigh()
 	{
-
+		return 4;
 	}
 };

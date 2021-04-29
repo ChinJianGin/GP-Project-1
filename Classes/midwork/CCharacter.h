@@ -24,10 +24,10 @@ protected:
 public:
 	void virtual characterInit(Sprite& loctag, Node& theScene) = 0;
 	//virtual Rect* getRect();
-	void virtual doRun() = 0;
-	void virtual doJump() = 0;
-	void virtual doRoll() = 0;
-	void virtual doJumpHigh() =0;
+	virtual int  doRun() = 0;
+	virtual int  doJump() = 0;
+	virtual int  doRoll() = 0;
+	virtual int  doJumpHigh() =0;
 	Node* getRoot();
 };
 

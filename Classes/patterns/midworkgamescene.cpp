@@ -23,6 +23,8 @@ GameScene::GameScene()
 	_healthbar_1 = nullptr;
 	_audio = nullptr;
 	_enemycontroller = nullptr;
+	_actionID = 0;
+	_chargeTime = 0.0f;
 }
 
 GameScene::~GameScene()
@@ -159,7 +161,13 @@ void GameScene::update(float dt)
 	/*if (_bBoyRun) {*/
 		_midobj->update(dt);
 		_enemycontroller->update(dt);
-		log("%f",_watsonRunner->getRoot()->getPosition().y);
+		_watsonRunner->update(dt, _boypt, _actionID, *_jumpbtn);
+		//log("%f",_watsonRunner->getRoot()->getPosition().y);
+		log("%f", _chargeTime);
+		if (_bBoyJump)
+		{
+			_chargeTime +=/* _chargeTime + */dt;
+		}
 	//}
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
@@ -193,6 +201,7 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 		else if (_jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
 			_ijumpid = touchId;
+			_boypt = _watsonRunner->getRoot()->getPosition();
 		}		
 		else {
 			_returnbtn->touchesBegin(touchLoc);
@@ -248,7 +257,17 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 			_jumpbtn->touchesEnded(touchLoc);
 			_bBoyJump = false;
 			_irunid = -1;
-			_watsonRunner->doJump();
+			if (_chargeTime > 0.5f) 
+			{
+				_actionID = _watsonRunner->doJumpHigh();
+				_chargeTime = 0;
+			}
+			else 
+			{
+				_actionID = _watsonRunner->doJump();
+				_chargeTime = 0;
+			}
+			
 		}
 		else {
 			if ( _returnbtn->touchesEnded(touchLoc) ) _bToStartScene = true;

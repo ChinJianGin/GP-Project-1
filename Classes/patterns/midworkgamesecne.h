@@ -41,6 +41,8 @@ private:
     CButton* _returnbtn, *_runbtn, *_jumpbtn;
     bool _bToStartScene, _bBoyRun, _bBoyJump;
     int _irunid, _ijumpid;
+    int _actionID;
+    float _chargeTime;
 
     // ¨¤¦âªº±±¨î
     cocos2d::Node* _boyRoot;
@@ -59,4 +61,6 @@ private:
     enemySpawn* _enemycontroller;
 
     cocos2d::ui::LoadingBar* _healthbar_1;
+
+    cocos2d::Point _boypt;
 };

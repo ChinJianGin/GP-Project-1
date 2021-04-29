@@ -35,24 +35,26 @@ public:
 
 		_myDifficulty = CEnemy::LV::TALLER;
 	}
-	void doRun()
+	int doRun()
 	{
 		_characterRunAct->gotoFrameAndPlay(0, 24, true);
+		return 1;
 	}
 
-	void doJump()
+	int doJump()
 	{
 		_characterRunAct->pause();
 		_characterJumpAct->gotoFrameAndPlay(30, 58, false);
+		return 2;
 	}
 
-	void doRoll()
+	int doRoll()
 	{
-
+		return 3;
 	}
 
-	void doJumpHigh()
+	int doJumpHigh()
 	{
-
+		return 4;
 	}
 };
