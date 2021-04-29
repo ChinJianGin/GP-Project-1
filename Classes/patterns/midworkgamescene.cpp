@@ -11,12 +11,12 @@ USING_NS_CC;
 
 GameScene::GameScene()
 {
-	_returnbtn = _runbtn = _jumpbtn = nullptr;
-	_bBoyJump = _bBoyRun = _bToStartScene = false;
+	_returnbtn = _runbtn = _jumpbtn = _rollbtn = _whichbtn = nullptr;
+	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = false;
 	_boyAction = nullptr;
 	_midobj = nullptr;
 	_boyRoot = nullptr;
-	_irunid = _ijumpid = -1;
+	_irunid = _ijumpid = _irollid =-1;
 	_watsonRunner = nullptr;
 	_normalEnemy = nullptr;
 	_score = nullptr;
@@ -33,6 +33,7 @@ GameScene::~GameScene()
 	CC_SAFE_DELETE(_runbtn);
 	CC_SAFE_DELETE(_jumpbtn);
 	CC_SAFE_DELETE(_midobj);
+	CC_SAFE_DELETE(_rollbtn);
 	this->removeAllChildren();
 	SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("gamescene.plist");
 	Director::getInstance()->getTextureCache()->removeUnusedTextures();
@@ -83,16 +84,25 @@ bool GameScene::init()
 	_bToStartScene = false;
 
 	// running 按鈕
-	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("runbtn"));
+	/*loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("runbtn"));
 	loctag->setVisible(false);
 	_runbtn = new (std::nothrow) CButton();
-	_runbtn->setProperty("runnormal.png", "runon.png", *this, loctag->getPosition());
+	_runbtn->setProperty("runnormal.png", "runon.png", *this, loctag->getPosition());*/
 
 	// jump 按鈕
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("jumpbtn"));
 	loctag->setVisible(false);
 	_jumpbtn = new (std::nothrow) CButton();
 	_jumpbtn->setProperty("jumpnormal.png", "jumpon.png", *this, loctag->getPosition());
+
+	//roll 按鈕
+	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("rollbtn"));
+	loctag->setVisible(false);
+	_rollbtn = new (std::nothrow) CButton();
+	_rollbtn->setProperty("runnormal.png", "runon.png", *this, loctag->getPosition());
+
+	//暫存
+	_whichbtn = new (std::nothrow) CButton();
 
 	// 加入跑步小男生
 	_boyRoot = CSLoader::createNode("boyrunning.csb"); //讀入節點(node)資料
@@ -161,12 +171,12 @@ void GameScene::update(float dt)
 	/*if (_bBoyRun) {*/
 		_midobj->update(dt);
 		_enemycontroller->update(dt);
-		_watsonRunner->update(dt, _boypt, _actionID, *_jumpbtn);
+		_watsonRunner->update(dt, _boypt, _actionID, *_whichbtn);
 		//log("%f",_watsonRunner->getRoot()->getPosition().y);
-		log("%f", _chargeTime);
+		//log("%f", _chargeTime);
 		if (_bBoyJump)
 		{
-			_chargeTime +=/* _chargeTime + */dt;
+			_chargeTime += dt;
 		}
 	//}
 	if (_bToStartScene) {
@@ -188,21 +198,24 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 		int  touchId = touch->getID();
 		touchMap.insert(std::unordered_map<int, Vec2>::value_type(touchId, touchLoc));
 		// 儲存觸控點座標與對應的 ID
-		if(_runbtn->touchesBegin(touchLoc)){
+		/*if(_runbtn->touchesBegin(touchLoc)){
 			_bBoyRun = true;
 			_irunid = touchId;
 			_watsonRunner->doRun();
 		}
-		/*if (_watsonRunner->getRect().containsPoint(touchLoc))
-		{
-			log("%f",_watsonRunner->getRect().size.width);
-			log("%f", _healthbar_1->getPosition());
-		}*/
-		else if (_jumpbtn->touchesBegin(touchLoc)) {
+		else*/ if (_jumpbtn->touchesBegin(touchLoc)) {
 			_bBoyJump = true;
 			_ijumpid = touchId;
 			_boypt = _watsonRunner->getRoot()->getPosition();
-		}		
+		}
+		else if (_rollbtn->touchesBegin(touchLoc)) {
+			log("roll");
+			_watsonRoll = true;
+			_irollid = touchId;
+			_whichbtn = _rollbtn;
+			_actionID = _watsonRunner->doRoll();
+			_boypt = _watsonRunner->getRoot()->getPosition();
+		}
 		else {
 			_returnbtn->touchesBegin(touchLoc);
 		}
@@ -223,14 +236,18 @@ void GameScene::onTouchesMoved(const std::vector<Touch*>& touches, Event* event)
 		touchMap.erase(touchId);			// 刪除這個 ID 在 MAP 中的內容
 		touchMap.insert(std::unordered_map<int, Vec2>::value_type(touchId, touchLoc));  // 將目前這個新的加入
 
-		if ( (_irunid == touchId) && _bBoyRun ) { // 這個 touch 點之前是點在 runbtn 上
-			if (!_runbtn->touchesMoved(touchLoc)) {	// 判斷是否已經移開跑步按扭
-				_bBoyRun = false;
-				_irunid = -1;
-			}
-		}
-		else if ((_ijumpid == touchId) && _bBoyJump) {
+		//if ( (_irunid == touchId) && _bBoyRun ) { // 這個 touch 點之前是點在 runbtn 上
+		//	if (!_runbtn->touchesMoved(touchLoc)) {	// 判斷是否已經移開跑步按扭
+		//		_bBoyRun = false;
+		//		_irunid = -1;
+		//	}
+		//}
+		//else 
+		if ((_ijumpid == touchId) && _bBoyJump) {
 			_jumpbtn->touchesMoved(touchLoc); // 只是讓 jump 按鈕改變顯示, 當手指移除按鈕區域時
+		}
+		else if ((_irollid == touchId) && _watsonRoll) {
+			_rollbtn->touchesMoved(touchLoc); // 只是讓 jump 按鈕改變顯示, 當手指移除按鈕區域時
 		}
 		else {
 			_returnbtn->touchesMoved(touchLoc);
@@ -248,26 +265,34 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 		auto PreLoc = touchMap.at(touchId);	// 查詢這個 ID 前一個觸控點的座標
 		touchMap.erase(touchId);			// 刪除這個 ID 在 MAP 中的內容
 
-		if ( (_irunid == touchId) && _bBoyRun) { // ID 相符而且正在跑中
-			_runbtn->touchesEnded(touchLoc); // 呼叫按鈕，讓狀態恢復
-			_bBoyRun = false;
-			_irunid = -1;
-		}
-		else if ((_ijumpid == touchId) && _bBoyJump) { // 這個 touch 點之前是點在 runbtn 上
+		//if ( (_irunid == touchId) && _bBoyRun) { // ID 相符而且正在跑中
+		//	_runbtn->touchesEnded(touchLoc); // 呼叫按鈕，讓狀態恢復
+		//	_bBoyRun = false;
+		//	_irunid = -1;
+		//}
+		//else 
+		if ((_ijumpid == touchId) && _bBoyJump) { // 這個 touch 點之前是點在 runbtn 上
 			_jumpbtn->touchesEnded(touchLoc);
 			_bBoyJump = false;
 			_irunid = -1;
 			if (_chargeTime > 0.5f) 
 			{
+				_whichbtn = _jumpbtn;
 				_actionID = _watsonRunner->doJumpHigh();
 				_chargeTime = 0;
 			}
 			else 
 			{
+				_whichbtn = _jumpbtn;
 				_actionID = _watsonRunner->doJump();
 				_chargeTime = 0;
 			}
 			
+		}
+		else if ((_irollid == touchId) && _watsonRoll) {
+			_rollbtn->touchesEnded(touchLoc);
+			_watsonRoll = false;
+			_irollid = -1;
 		}
 		else {
 			if ( _returnbtn->touchesEnded(touchLoc) ) _bToStartScene = true;

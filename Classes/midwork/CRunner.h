@@ -56,17 +56,24 @@ public:
 
 	int doJump() {
 		_neutralFace->setVisible(false);
+		_happyFace->setVisible(false);
+		_sadFace->setVisible(false);
 		_characterJumpAct->gotoFrameAndPlay(72, 132, false);
 		return 2;
 	}
 
 	int doRoll() {
-		_characterRollAct->gotoFrameAndPlay(33, 71, false);
+		_neutralFace->setVisible(false);
+		_happyFace->setVisible(false);
+		_sadFace->setVisible(false);
+		_characterRollAct->gotoFrameAndPlay(33, 71, true);
 		return 3;
 	}
 
 	int doJumpHigh() {
 		_neutralFace->setVisible(false);
+		_happyFace->setVisible(false);
+		_sadFace->setVisible(false);
 		_characterJumpHighAct->gotoFrameAndPlay(133, 201, false);
 		return 4;
 	}

@@ -38,9 +38,9 @@ public:
     CREATE_FUNC(GameScene); //展開後定義了 create() 成員函式
 
 private:
-    CButton* _returnbtn, *_runbtn, *_jumpbtn;
-    bool _bToStartScene, _bBoyRun, _bBoyJump;
-    int _irunid, _ijumpid;
+    CButton* _returnbtn, *_runbtn, *_jumpbtn, *_rollbtn, *_whichbtn;
+    bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll;
+    int _irunid, _ijumpid, _irollid;
     int _actionID;
     float _chargeTime;
 

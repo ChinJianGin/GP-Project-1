@@ -63,5 +63,23 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 			theButton.setEnabled(true);
 		}
 	}
+	else if (whichAction == 3)
+	{
+		_fjtime += dt;
+		if (_characterRollAct->getCurrentFrame() == 33)
+		{
+			theButton.setEnabled(false);
+		}
+		if (_fjtime >= 2.0f)
+		{
+			_characterRollAct->pause();
+			doRun();
+			_neutralFace->setVisible(true);
+			_fjtime = 0;
+			_characterRoot->setPosition(_characterRoot->getPosition().x, _nowPos.y);
+			whichAction = 0;
+			theButton.setEnabled(true);
+		}
+	}
 
 }
