@@ -14,7 +14,7 @@ private:
 
 public:
 	void characterInit(Sprite& loctag, Node& theScene) {
-		_characterRoot = CSLoader::createNode("speedenemy.csb");
+		_characterRoot = CSLoader::createNode("speedenemy-2.csb");
 #ifndef SPAWN
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);		
@@ -26,11 +26,11 @@ public:
 		
 		
 
-		_characterJumpAct = CSLoader::createTimeline("speedenemy.csb");
+		_characterJumpAct = CSLoader::createTimeline("speedenemy-2.csb");
 		_characterJumpAct->setTimeSpeed(1.0f);
 		_characterRoot->runAction(_characterJumpAct);
 
-		_characterRunAct = CSLoader::createTimeline("speedenemy.csb");		
+		_characterRunAct = CSLoader::createTimeline("speedenemy-2.csb");		
 		_characterRunAct->setTimeSpeed(1.0f);
 		_characterRoot->runAction(_characterRunAct);
 

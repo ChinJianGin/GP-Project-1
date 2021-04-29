@@ -14,26 +14,26 @@ private:
 public:
 	void characterInit(Sprite& loctag, Node& theScene) {
 		_loctag = &loctag;
-		_characterRoot = CSLoader::createNode("watsonrun.csb");
+		_characterRoot = CSLoader::createNode("watsonrun-2.csb");
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
 		theScene.addChild(_characterRoot, 5);
 
 		_characterRect = Rect(loctag.getPosition().x - loctag.getContentSize().width / 2, loctag.getPosition().y - loctag.getContentSize().height / 2, loctag.getContentSize().width, loctag.getContentSize().height);
 
-		_characterRunAct = CSLoader::createTimeline("watsonrun.csb");
+		_characterRunAct = CSLoader::createTimeline("watsonrun-2.csb");
 		_characterRoot->runAction(_characterRunAct);
 		_characterRunAct->setTimeSpeed(1.0f);
 
-		_characterJumpAct = CSLoader::createTimeline("watsonrun.csb");
+		_characterJumpAct = CSLoader::createTimeline("watsonrun-2.csb");
 		_characterRoot->runAction(_characterJumpAct);
 		_characterJumpAct->setTimeSpeed(1.0f);
 
-		_characterRollAct = CSLoader::createTimeline("watsonrun.csb");
+		_characterRollAct = CSLoader::createTimeline("watsonrun-2.csb");
 		_characterRoot->runAction(_characterRollAct);
 		_characterRollAct->setTimeSpeed(1.0f);
 
-		_characterJumpHighAct = CSLoader::createTimeline("watsonrun.csb");
+		_characterJumpHighAct = CSLoader::createTimeline("watsonrun-2.csb");
 		_characterRoot->runAction(_characterJumpHighAct);
 		_characterJumpHighAct->setTimeSpeed(1.0f);
 

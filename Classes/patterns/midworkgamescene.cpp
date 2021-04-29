@@ -159,6 +159,7 @@ void GameScene::update(float dt)
 	/*if (_bBoyRun) {*/
 		_midobj->update(dt);
 		_enemycontroller->update(dt);
+		log("%f",_watsonRunner->getRoot()->getPosition().y);
 	//}
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
