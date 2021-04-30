@@ -83,3 +83,4 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 	}
 
 }
+

@@ -3,6 +3,8 @@
 #include "cocos2d.h"
 #include "vector"
 #include "algorithm"
+#include "midwork/CEnemy.h"
+
 USING_NS_CC;
 
 class CScoring
@@ -18,8 +20,8 @@ private:
 public:
 	void init(Node& player,Node& theScene, Size& visibleSize, Vec2& origin);
 	void ranking();
-	void pointCal();
 	void resetScore();
+	void setScore(CEnemy& theEnemy);
 
 	int getNowScore();
 	bool bigTosmall(int i, int j);

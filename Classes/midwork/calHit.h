@@ -12,7 +12,7 @@ private:
 	Point _runnerLoc;
 	CScoring* _score;
 
-	bool _hitNor, _hitTall, _hitSpeed;
+	bool _hitNor, _hitTall, _hitSpeed, _noHitNor, _noHitTall, _noHitSpeed;
 public:
 	/*calhit();
 	~calhit();*/

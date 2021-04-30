@@ -57,4 +57,9 @@ public:
 	{
 		return 4;
 	}
+	CEnemy::LV getDifficulty()
+	{
+		return _myDifficulty;
+	}
 };
+

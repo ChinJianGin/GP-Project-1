@@ -38,6 +38,32 @@ void CScoring::ranking() {
 	resetScore();
 }
 
+void CScoring::setScore(CEnemy& theEnemy)
+{
+	ostr.str(""); ostr.clear();
+	if (theEnemy.getDifficulty() == CEnemy::LV::NORMAL)
+	{
+		_nowScore = _nowScore + 1;
+		ostr << _nowScore;
+		_strNowScore = ostr.str();
+		labelBMF->setString(_strNowScore);
+	}
+	else if (theEnemy.getDifficulty() == CEnemy::LV::TALLER)
+	{
+		_nowScore = _nowScore + 2;
+		ostr << _nowScore;
+		_strNowScore = ostr.str();
+		labelBMF->setString(_strNowScore);
+	}
+	else
+	{
+		_nowScore = _nowScore + 3;
+		ostr << _nowScore;
+		_strNowScore = ostr.str();
+		labelBMF->setString(_strNowScore);
+	}
+}
+
 void CScoring::resetScore() {
 	_nowScore = 0;
 }

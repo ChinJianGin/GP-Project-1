@@ -16,6 +16,7 @@ public:
 	virtual int  doJump() = 0;
 	virtual int  doRoll() = 0;
 	virtual int  doJumpHigh() = 0;
+	virtual CEnemy::LV getDifficulty() = 0;
 protected:
 	
 };
