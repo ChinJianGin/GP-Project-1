@@ -23,4 +23,5 @@ public:
 	void init(cocos2d::Sprite& loctag,cocos2d::Node& parent);
 	void resetEnemies(int itype);
 
+	CEnemy* getEnemies(int i);
 };

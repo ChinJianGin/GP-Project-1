@@ -15,6 +15,7 @@
 #include "midwork/CScoring.h"
 #include "midwork/audioController.h"
 #include "midwork/enemySpawn.h"
+#include "midwork/calHit.h"
 
 class GameScene : public cocos2d::Scene
 {
@@ -38,7 +39,7 @@ public:
     CREATE_FUNC(GameScene); //展開後定義了 create() 成員函式
 
 private:
-    CButton* _returnbtn, *_runbtn, *_jumpbtn, *_rollbtn, *_whichbtn;
+    CButton* _returnbtn, *_runbtn, *_jumpbtn, *_rollbtn, *_resetbtn, *_whichbtn;
     bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll, _resetJump, _resetRoll;
     int _irunid, _ijumpid, _irollid;
     int _actionID;
@@ -60,6 +61,8 @@ private:
     audioController* _audio;
 
     enemySpawn* _enemycontroller;
+
+    calhit* _isHit;
 
     cocos2d::ui::LoadingBar* _healthbar_1;
 

@@ -11,7 +11,7 @@ USING_NS_CC;
 
 GameScene::GameScene()
 {
-	_returnbtn = _runbtn = _jumpbtn = _rollbtn = _whichbtn = nullptr;
+	_returnbtn = _runbtn = _jumpbtn = _rollbtn = _whichbtn = _resetbtn = nullptr;
 	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = _resetJump = _resetRoll = false;
 	_boyAction = nullptr;
 	_midobj = nullptr;
@@ -23,6 +23,7 @@ GameScene::GameScene()
 	_healthbar_1 = nullptr;
 	_audio = nullptr;
 	_enemycontroller = nullptr;
+	_isHit = nullptr;
 	_actionID = 0;
 	_chargeTime = _timer1 = _timer2 = 0.0f;
 }
@@ -101,6 +102,12 @@ bool GameScene::init()
 	_rollbtn = new (std::nothrow) CButton();
 	_rollbtn->setProperty("runnormal.png", "runon.png", *this, loctag->getPosition());
 
+	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("resetbtn"));
+	loctag->setVisible(false);
+	_resetbtn = new (std::nothrow) CButton();
+	_resetbtn->setProperty("replaybtn.png", "runon.png", *this, loctag->getPosition());
+	
+
 	//暫存
 	_whichbtn = new (std::nothrow) CButton();
 
@@ -130,6 +137,8 @@ bool GameScene::init()
 	_score = new CScoring();
 	_score->init(*_watsonRunner, *this, visibleSize, origin);
 	
+	_isHit = new calhit();
+	_isHit->init(*_enemycontroller, *_watsonRunner, *loctag, *_score);
 
 		//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));
@@ -172,6 +181,7 @@ void GameScene::update(float dt)
 	_midobj->update(dt);
 	_enemycontroller->update(dt);
 	_watsonRunner->update(dt, _boypt, _actionID, *_whichbtn);
+	_isHit->update(dt, _actionID);
 		//log("%f",_watsonRunner->getRoot()->getPosition().y);
 		//log("%f", _chargeTime);
 	if (_bBoyJump)
@@ -182,7 +192,7 @@ void GameScene::update(float dt)
 	if (_resetRoll)
 	{
 		_timer1 += dt;
-		log("_timer = %f", _timer1);
+		//log("_timer = %f", _timer1);
 		if (_timer1 >= 2)
 		{
 			_watsonRoll = false;
@@ -235,7 +245,6 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 			_boypt = _watsonRunner->getRoot()->getPosition();
 		}
 		else if (!_resetJump && !_bBoyJump && _rollbtn->touchesBegin(touchLoc)) {
-			log("roll");
 			_resetRoll = true;
 			_watsonRoll = true;
 			_irollid = touchId;

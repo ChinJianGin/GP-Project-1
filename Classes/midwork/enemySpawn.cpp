@@ -129,3 +129,8 @@ void enemySpawn::resetEnemies(int itype)
 		_enemies[2]->getRoot()->setVisible(true);
 	}
 }
+
+CEnemy* enemySpawn::getEnemies(int i)
+{
+	return _enemies[i];
+}

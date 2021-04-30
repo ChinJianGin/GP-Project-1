@@ -10,19 +10,19 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 		if (_characterJumpAct->getCurrentFrame() == 72) 
 		{
 			theButton.setEnabled(false);
-			float dh = sinf(_fjtime * (M_PI / 1.0f));
+			float dh = sinf(_fjtime * (M_PI / 2.0f));
 			cocos2d::Point pt = _characterRoot->getPosition();
-			pt.y = dh * 150 + _nowPos.y;
+			pt.y = dh * 300 + _nowPos.y;
 			_characterRoot->setPosition(pt);
 		}
-		else if (_fjtime > 0.7f && _characterJumpAct->getCurrentFrame() == 91)
+		else if (/*_fjtime > 0.3f && */_characterJumpAct->getCurrentFrame() == 91)
 		{
-			float dh = sinf(_fjtime * (M_PI / 1.0f));
+			float dh = cosf(_fjtime * (M_PI / 2.5f));
 			cocos2d::Point pt = _characterRoot->getPosition();
-			pt.y = dh * 150 + _nowPos.y;
+			pt.y = _nowPos.y - dh;
 			_characterRoot->setPosition(pt);
 		}
-		if (_fjtime > 1.0f && _characterJumpAct->getCurrentFrame() == 132)
+		if (_characterJumpAct->getCurrentFrame() == 132)
 		{ // °±¤î¸õÄ£
 			_neutralFace->setVisible(true);
 			_fjtime = 0;
