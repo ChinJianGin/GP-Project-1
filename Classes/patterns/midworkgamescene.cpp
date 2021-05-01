@@ -135,10 +135,15 @@ bool GameScene::init()
 	_enemycontroller->init(*loctag, *this);
 
 	_score = new CScoring();
-	_score->init(*_watsonRunner, *this, visibleSize, origin);
-	
+	_score->init(*_watsonRunner, *this, visibleSize, origin);	
+
+	_healthbar_1 = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("healthbar"));
+	_healthbar_1->setDirection(cocos2d::ui::LoadingBar::Direction::LEFT);
+	_healthbar_1->setPercent(100);
+	_healthbar_1->setGlobalZOrder(11);
+
 	_isHit = new calhit();
-	_isHit->init(*_enemycontroller, *_watsonRunner, *loctag, *_score);
+	_isHit->init(*_enemycontroller, *_watsonRunner, *loctag, *_score, *_healthbar_1);
 
 		//加入可動的中景
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("road00"));
@@ -146,10 +151,7 @@ bool GameScene::init()
 	_midobj = new (std::nothrow) CMiddleObject();
 	_midobj->init("road00.png", "midobj.csb", *this, loctag->getPosition());
 
-	_healthbar_1 = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("healthbar"));
-	_healthbar_1->setDirection(cocos2d::ui::LoadingBar::Direction::LEFT);
-	_healthbar_1->setPercent(70);
-	_healthbar_1->setGlobalZOrder(11);
+
 	
 
 

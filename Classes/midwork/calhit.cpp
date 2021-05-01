@@ -1,6 +1,6 @@
 #include "midwork/calHit.h"
 
-void calhit::init(enemySpawn& enemy, CRunner& player, Sprite& loctag, CScoring& score)
+void calhit::init(enemySpawn& enemy, CRunner& player, Sprite& loctag, CScoring& score, ui::LoadingBar& healthBar)
 {
 	_enemy = &enemy;
 	_runner = &player;
@@ -8,6 +8,7 @@ void calhit::init(enemySpawn& enemy, CRunner& player, Sprite& loctag, CScoring& 
 	_score = &score;
 	_hitNor = _hitTall = _hitSpeed = _noHitNor = _noHitTall = _noHitSpeed = false;
 	_fdt = 0;
+	_healthBar = &healthBar;
 }
 
 void calhit::update(float dt, int& whichaction)
@@ -20,6 +21,8 @@ void calhit::update(float dt, int& whichaction)
 		if (_runner->getRoot()->getPosition().y <= 204.0f && !_hitNor && whichaction != 3)
 		{//hit by normal
 			_hitNor = true;
+			_runner->setNowHp(1.0f);
+			_healthBar->setPercent(_runner->getHPpercent());
 			log("hit normal");
 		}
 		else if((whichaction == 3 || !_hitNor) && !_noHitNor)
@@ -57,6 +60,8 @@ void calhit::update(float dt, int& whichaction)
 		if (_runner->getRoot()->getPosition().y <= 220.0f && !_hitTall && whichaction != 3)
 		{//hit tall
 			_hitTall = true;
+			_runner->setNowHp(2.0f);
+			_healthBar->setPercent(_runner->getHPpercent());
 			log("hit taller");			
 		}
 		else if ((whichaction == 3 || !_hitTall) && !_noHitTall)
@@ -93,6 +98,8 @@ void calhit::update(float dt, int& whichaction)
 		if (_runner->getRoot()->getPosition().y <= 204.0f && !_hitSpeed && whichaction != 3)
 		{//hit speed
 			_hitSpeed = true;
+			_runner->setNowHp(3.0f);
+			_healthBar->setPercent(_runner->getHPpercent());
 			log("hit speed");			
 		}
 		else if ((whichaction == 3 || !_hitSpeed) && !_noHitSpeed)

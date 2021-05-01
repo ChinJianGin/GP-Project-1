@@ -115,3 +115,18 @@ void CRunner::setFace(int NO)
 		_happyFace->setVisible(true);
 	}
 }
+
+float CRunner::getNowHP()
+{
+	return _NOW_HP;
+}
+
+float CRunner::getHPpercent()
+{
+	return (_NOW_HP / _MAX_HP) * 100.0f;
+}
+
+void CRunner::setNowHp(float damage)
+{
+	_NOW_HP = _NOW_HP - damage;
+}

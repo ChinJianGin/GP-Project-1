@@ -9,7 +9,7 @@ USING_NS_CC;
 
 class CRunner : public CCharacter {
 private:
-	int _MAX_HP, _NOW_HP;
+	float _MAX_HP, _NOW_HP;
 	float _fjtime;
 	enum class _playerState{DEAD,ALIVE};
 	CRunner::_playerState _nowState;
@@ -17,6 +17,7 @@ public:
 	void characterInit(Sprite& loctag, Node& theScene) {
 		_loctag = &loctag;
 		_fjtime = 0;
+		_MAX_HP = _NOW_HP = 100.0f;
 		_characterRoot = CSLoader::createNode("watsonrun-2.csb");
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
@@ -82,6 +83,12 @@ public:
 	Rect getRect() {
 		return _characterRect;
 	};
+
+	float getHPpercent();
+
+	float getNowHP();
+
+	void setNowHp(float damage);
 
 	void setFace(int NO);
 };
