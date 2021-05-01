@@ -260,6 +260,7 @@ void GameScene::onTouchesBegan(const std::vector<Touch*>& touches, Event* event)
 			_boypt = _watsonRunner->getRoot()->getPosition();
 		}
 		else {
+			_resetbtn->touchesBegin(touchLoc);
 			_returnbtn->touchesBegin(touchLoc);
 		}
 
@@ -293,6 +294,7 @@ void GameScene::onTouchesMoved(const std::vector<Touch*>& touches, Event* event)
 			_rollbtn->touchesMoved(touchLoc); // 只是讓 jump 按鈕改變顯示, 當手指移除按鈕區域時
 		}
 		else {
+			_resetbtn->touchesMoved(touchLoc);
 			_returnbtn->touchesMoved(touchLoc);
 		}
 	}
@@ -339,6 +341,7 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 			_irollid = -1;
 		}
 		else {
+			if (_resetbtn->touchesEnded(touchLoc))_reset();
 			if ( _returnbtn->touchesEnded(touchLoc) ) _bToStartScene = true;
 			CCLOG("%d",_bToStartScene);
 		}
