@@ -17,7 +17,7 @@ public:
 	void characterInit(Sprite& loctag, Node& theScene) {
 		_loctag = &loctag;
 		_fjtime = 0;
-		_MAX_HP = _NOW_HP = 100.0f;
+		_MAX_HP = _NOW_HP = 10.0f;
 		_characterRoot = CSLoader::createNode("watsonrun-2.csb");
 		_characterRoot->setPosition(loctag.getPosition());
 		loctag.setVisible(false);
@@ -91,4 +91,6 @@ public:
 	void setNowHp(float damage);
 
 	void setFace(int NO);
+
+	void resetRunner();
 };

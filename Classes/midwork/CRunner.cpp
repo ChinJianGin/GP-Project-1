@@ -87,8 +87,6 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 
 void CRunner::setFace(int NO)
 {
-	bool neutral, sad, happy;
-	neutral = sad = happy = false;
 	if (NO == 1)
 	{
 		_neutralFace->setVisible(true);
@@ -98,7 +96,6 @@ void CRunner::setFace(int NO)
 	}
 	else if (NO == 2)
 	{
-		sad = true;
 		auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(250, 50, 125));
 		_characterRoot->runAction(tintTo);
 		_neutralFace->setVisible(false);
@@ -107,7 +104,6 @@ void CRunner::setFace(int NO)
 	}
 	else
 	{
-		happy = true;
 		auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(255, 255, 0));
 		_characterRoot->runAction(tintTo);
 		_neutralFace->setVisible(false);
@@ -129,4 +125,11 @@ float CRunner::getHPpercent()
 void CRunner::setNowHp(float damage)
 {
 	_NOW_HP = _NOW_HP - damage;
+}
+
+void CRunner::resetRunner()
+{
+	_MAX_HP = _NOW_HP = 10.0f;
+	_fjtime = 0;
+	setFace(1);
 }

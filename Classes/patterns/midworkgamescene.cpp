@@ -186,6 +186,11 @@ void GameScene::update(float dt)
 	_isHit->update(dt, _actionID);
 		//log("%f",_watsonRunner->getRoot()->getPosition().y);
 		//log("%f", _chargeTime);
+	if (_watsonRunner->getNowHP() <= 0)
+	{//player dead
+		_score->ranking();
+		_reset();
+	}
 	if (_bBoyJump)
 	{
 		_chargeTime += dt;
@@ -343,4 +348,18 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 void GameScene::onTouchesCancelled(const std::vector<Touch*>& touches, Event* event)
 {
 	onTouchesEnded(touches, event);
+}
+
+void GameScene::_reset()
+{
+	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = _resetJump = _resetRoll = false;
+	_irunid = _ijumpid = _irollid = -1;
+	_actionID = 0;
+	_boypt = Point(0, 0);
+	_chargeTime = _timer1 = _timer2 = 0.0f;
+	_midobj->resetObj(0); _midobj->resetObj(1);
+	_watsonRunner->resetRunner();
+	_healthbar_1->setPercent(_watsonRunner->getHPpercent());
+	_score->resetScore();
+	_enemycontroller->resetEnemies(0); _enemycontroller->resetEnemies(1); _enemycontroller->resetEnemies(2);
 }

@@ -65,7 +65,11 @@ void CScoring::setScore(CEnemy& theEnemy)
 }
 
 void CScoring::resetScore() {
+	ostr.str(""); ostr.clear();
 	_nowScore = 0;
+	ostr << _nowScore;
+	_strNowScore = ostr.str();
+	labelBMF->setString(_strNowScore);
 }
 
 int CScoring::getNowScore() {

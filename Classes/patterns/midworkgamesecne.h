@@ -38,6 +38,8 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene); //展開後定義了 create() 成員函式
 
+    void _reset();
+
 private:
     CButton* _returnbtn, *_runbtn, *_jumpbtn, *_rollbtn, *_resetbtn, *_whichbtn;
     bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll, _resetJump, _resetRoll;
