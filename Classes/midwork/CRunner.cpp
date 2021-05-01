@@ -15,7 +15,7 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 			pt.y = dh * 300 + _nowPos.y;
 			_characterRoot->setPosition(pt);
 		}
-		else if (/*_fjtime > 0.3f && */_characterJumpAct->getCurrentFrame() == 91)
+		else if (_characterJumpAct->getCurrentFrame() == 91)
 		{
 			float dh = cosf(_fjtime * (M_PI / 2.5f));
 			cocos2d::Point pt = _characterRoot->getPosition();
@@ -24,7 +24,7 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 		}
 		if (_characterJumpAct->getCurrentFrame() == 132)
 		{ // 停止跳耀
-			_neutralFace->setVisible(true);
+			//_neutralFace->setVisible(true);
 			_fjtime = 0;
 			// 重設 boy Y軸高度, 避免多跳幾次後產生誤差
 			_characterRoot->setPosition(_characterRoot->getPosition().x, _nowPos.y);
@@ -54,7 +54,7 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 		}
 		if (_fjtime > 1.15f && _characterJumpHighAct->getCurrentFrame() == 201)
 		{ // 停止跳耀
-			_neutralFace->setVisible(true);
+			//_neutralFace->setVisible(true);
 			_fjtime = 0;
 			// 重設 boy Y軸高度, 避免多跳幾次後產生誤差
 			_characterRoot->setPosition(_characterRoot->getPosition().x, _nowPos.y);
@@ -74,7 +74,8 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 		{
 			_characterRollAct->pause();
 			doRun();
-			_neutralFace->setVisible(true);
+			log("do Run");
+			//_neutralFace->setVisible(true);
 			_fjtime = 0;
 			_characterRoot->setPosition(_characterRoot->getPosition().x, _nowPos.y);
 			whichAction = 0;
@@ -84,3 +85,33 @@ void CRunner::update(float dt, cocos2d::Point& _nowPos,int& whichAction, CButton
 
 }
 
+void CRunner::setFace(int NO)
+{
+	bool neutral, sad, happy;
+	neutral = sad = happy = false;
+	if (NO == 1)
+	{
+		_neutralFace->setVisible(true);
+		_sadFace->setVisible(false);
+		_happyFace->setVisible(false);
+		_characterRoot->setColor(Color3B(255, 255, 255));
+	}
+	else if (NO == 2)
+	{
+		sad = true;
+		auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(250, 50, 125));
+		_characterRoot->runAction(tintTo);
+		_neutralFace->setVisible(false);
+		_sadFace->setVisible(true);
+		_happyFace->setVisible(false);
+	}
+	else
+	{
+		happy = true;
+		auto tintTo = cocos2d::TintTo::create(1.25f, Color3B(255, 255, 0));
+		_characterRoot->runAction(tintTo);
+		_neutralFace->setVisible(false);
+		_sadFace->setVisible(false);
+		_happyFace->setVisible(true);
+	}
+}

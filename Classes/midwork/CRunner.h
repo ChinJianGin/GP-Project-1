@@ -82,4 +82,6 @@ public:
 	Rect getRect() {
 		return _characterRect;
 	};
+
+	void setFace(int NO);
 };

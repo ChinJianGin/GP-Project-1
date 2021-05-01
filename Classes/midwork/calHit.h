@@ -13,6 +13,7 @@ private:
 	CScoring* _score;
 
 	bool _hitNor, _hitTall, _hitSpeed, _noHitNor, _noHitTall, _noHitSpeed;
+	float _fdt;
 public:
 	/*calhit();
 	~calhit();*/
