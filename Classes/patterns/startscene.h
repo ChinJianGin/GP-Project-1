@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "common/CButton.h"
+#include "midwork/CScoring.h"
 
 class StartScene : public cocos2d::Scene
 {
@@ -24,6 +25,7 @@ public:
 
 private:
     CButton* _startBtn;
+    CScoring* _rank;
     bool _bToGameScene;
 
 };

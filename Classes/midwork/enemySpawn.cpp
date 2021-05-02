@@ -28,7 +28,7 @@ void enemySpawn::update(float dt)
 	pt0.x += dt * MOVESPEED;
 	if (pt0.x >= 0 && _enemieson[0] == 1)
 	{
-		log("burn");
+		//log("burn");
 		_enemies[0]->doJump();
 		_enemieson[0]++;
 	}
@@ -47,7 +47,7 @@ void enemySpawn::update(float dt)
 	pt1.x += dt * MOVESPEED;
 	if (pt1.x >= 0 && _enemieson[1] == 1)
 	{
-		log("burn");
+		//log("burn");
 		_enemies[1]->doJump();
 		_enemieson[1]++;
 	}
@@ -67,7 +67,7 @@ void enemySpawn::update(float dt)
 	pt2.x += dt * MOVESPEED * 1.5;
 	if (pt2.x >= 0 && _enemieson[2] == 1)
 	{
-		log("speed");
+		//log("speed");
 		_enemies[2]->doJump();
 		_enemieson[2]++;
 	}

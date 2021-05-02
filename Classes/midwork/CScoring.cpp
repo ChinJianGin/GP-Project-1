@@ -4,15 +4,35 @@
 
 USING_NS_CC;
 
+using namespace std;
+
+static CScoring* _singleScore = nullptr;
+
+vector<int> _score = {0,0,0,0,0,0,0,0,0,0};
+
 bool CScoring::bigTosmall(int i, int j)
 {
 	return i > j;
 }
 
-void CScoring::init(Node& player, Node& theScene, Size& visibleSize, Vec2& origin) {
-	_hisScore[0] = _hisScore[1] = _hisScore[2] = _hisScore[3] = _hisScore[4] = _hisScore[5] = _hisScore[6] = _hisScore[7] = _hisScore[8] = _hisScore[9] = _hisScore[10] = 0;
-	_score = { _hisScore, _hisScore+10 }; 
-	ostr.str("");
+void CScoring::StartInit(Node& theScene, Size& visibleSize, Vec2& origin) {
+	for (int j = 0; j < 10; j++)
+	{
+		log("big bug");
+		ostr.str(""); ostr.clear();
+		ostr << _hisScore[j];
+		_strNowScore = ostr.str();
+		labelBMF = Label::createWithBMFont("fonts/couriernew32.fnt", _strNowScore);
+		auto size = labelBMF->getContentSize();
+		labelBMF->setPosition(Vec2(origin.x + visibleSize.width / 10 + (j * 50), origin.y + visibleSize.height / 8 - size.height));
+		theScene.addChild(labelBMF, 11);
+	}	
+}
+
+void CScoring::GameInit(Node& theScene, Size& visibleSize, Vec2& origin) 
+{
+	log("initscore");
+	ostr.str(""); ostr.clear();
 	_nowScore = 0;
 	ostr << _nowScore;
 	_strNowScore = ostr.str();
@@ -20,22 +40,25 @@ void CScoring::init(Node& player, Node& theScene, Size& visibleSize, Vec2& origi
 	auto size = labelBMF->getContentSize();
 	labelBMF->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - size.height));
 	theScene.addChild(labelBMF, 11);
-	_player = &player;
 }
 
-void CScoring::ranking() {
+void CScoring::ranking(int nowscore) {
+	log("ranking");
 	int i = 0;
 	int localScore = 0;
-	localScore = _nowScore;
+	localScore = nowscore;
 	_score.push_back(localScore);
-	std::sort(_score.begin(), _score.end(), [](int i, int j) {return i > j; });
+	sort(_score.begin(), _score.end(), [](int i, int j) {return i > j; });
 	_score.pop_back();
-	for (std::vector<int>::iterator first = _score.begin(); first != _score.end(); ++first)
+	vector<int>::iterator first1 = _score.begin();
+	log("%d",  first1);
+
+	for (vector<int>::iterator first = _score.begin(); first != _score.end(); ++first)
 	{
+		log("ranking");
 		_hisScore[i] = *first;
 		i++;
 	}
-	resetScore();
 }
 
 void CScoring::setScore(CEnemy& theEnemy)
@@ -74,4 +97,18 @@ void CScoring::resetScore() {
 
 int CScoring::getNowScore() {
 	return _nowScore;
+}
+
+CScoring* CScoring::getSingleScore()
+{
+	if (_singleScore == nullptr)
+	{
+		_singleScore = new CScoring();
+	}
+	return _singleScore;
+}
+
+int CScoring::gethisscore()
+{
+	return _hisScore[0];
 }

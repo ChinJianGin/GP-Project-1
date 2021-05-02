@@ -9,20 +9,23 @@ USING_NS_CC;
 
 class CScoring
 {
-private:
+private:	
 	std::ostringstream ostr;	
 	std::string _strNowScore;
 	Label* labelBMF;
-	Node* _player;
 	int _nowScore;
-	int _hisScore[10];
-	std::vector<int> _score;
+	int _hisScore[10];	
 public:
-	void init(Node& player,Node& theScene, Size& visibleSize, Vec2& origin);
-	void ranking();
+	void StartInit(Node& theScene, Size& visibleSize, Vec2& origin);
+	void GameInit(Node& theScene, Size& visibleSize, Vec2& origin);
+	void ranking(int nowscore);
 	void resetScore();
 	void setScore(CEnemy& theEnemy);
 
 	int getNowScore();
 	bool bigTosmall(int i, int j);
+
+	static CScoring* getSingleScore();
+
+	int gethisscore();
 };

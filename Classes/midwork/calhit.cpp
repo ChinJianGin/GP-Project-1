@@ -23,7 +23,7 @@ void calhit::update(float dt, int& whichaction)
 			_hitNor = true;
 			_runner->setNowHp(1.0f);
 			_healthBar->setPercent(_runner->getHPpercent());
-			log("hit normal");
+			//log("hit normal");
 		}
 		else if((whichaction == 3 || !_hitNor) && !_noHitNor)
 		{//miss
@@ -62,7 +62,7 @@ void calhit::update(float dt, int& whichaction)
 			_hitTall = true;
 			_runner->setNowHp(2.0f);
 			_healthBar->setPercent(_runner->getHPpercent());
-			log("hit taller");			
+			//log("hit taller");			
 		}
 		else if ((whichaction == 3 || !_hitTall) && !_noHitTall)
 		{//miss
@@ -100,7 +100,7 @@ void calhit::update(float dt, int& whichaction)
 			_hitSpeed = true;
 			_runner->setNowHp(3.0f);
 			_healthBar->setPercent(_runner->getHPpercent());
-			log("hit speed");			
+			//log("hit speed");			
 		}
 		else if ((whichaction == 3 || !_hitSpeed) && !_noHitSpeed)
 		{//miss

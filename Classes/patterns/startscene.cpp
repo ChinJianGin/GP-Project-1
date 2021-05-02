@@ -58,6 +58,9 @@ bool StartScene::init()
     _startBtn->setProperty("startnormal.png", "starton.png", *this, btnloc->getPosition());
     _bToGameScene = false;
 
+    _rank = CScoring::getSingleScore();
+    _rank->StartInit(*this, visibleSize, origin);
+
     //創建一個一對一的事件聆聽器
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(StartScene::onTouchBegan, this);

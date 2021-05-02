@@ -134,8 +134,8 @@ bool GameScene::init()
 	_enemycontroller = new enemySpawn();
 	_enemycontroller->init(*loctag, *this);
 
-	_score = new CScoring();
-	_score->init(*_watsonRunner, *this, visibleSize, origin);	
+	_score = CScoring::getSingleScore();
+	_score->GameInit(*this, visibleSize, origin);	
 
 	_healthbar_1 = dynamic_cast<cocos2d::ui::LoadingBar*>(rootNode->getChildByName("healthbar"));
 	_healthbar_1->setDirection(cocos2d::ui::LoadingBar::Direction::LEFT);
@@ -186,9 +186,10 @@ void GameScene::update(float dt)
 	_isHit->update(dt, _actionID);
 		//log("%f",_watsonRunner->getRoot()->getPosition().y);
 		//log("%f", _chargeTime);
+	//log("%d", _score->gethisscore());
 	if (_watsonRunner->getNowHP() <= 0)
 	{//player dead
-		_score->ranking();
+		_score->ranking(_score->getNowScore());
 		_reset();
 	}
 	if (_bBoyJump)
