@@ -8,6 +8,8 @@ USING_NS_CC;
 StartScene::StartScene()
 {
     _startBtn = nullptr;
+    _countingDown = nullptr;
+    _countingAct = nullptr;
 }
 
 StartScene::~StartScene()
@@ -61,6 +63,15 @@ bool StartScene::init()
     _rank = CScoring::getSingleScore();
     _rank->StartInit(*this, visibleSize, origin);
 
+    _countingDown = CSLoader::createNode("countingdown.csb");
+    _countingDown->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    _countingDown->setVisible(false);
+    this->addChild(_countingDown, 15);
+
+    _countingAct = CSLoader::createTimeline("countingdown.csb");
+    _countingDown->runAction(_countingAct);
+    _countingAct->setTimeSpeed(1.0f);
+
     //創建一個一對一的事件聆聽器
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(StartScene::onTouchBegan, this);
@@ -79,13 +90,17 @@ void StartScene::update(float dt)
 {
     if (_bToGameScene) { // 切換到 SecondScene
         // 先將這個 SCENE 的 update  從 schedule update 中移出
-        this->unschedule(schedule_selector(StartScene::update));
-        SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("startscene.plist");
-        //  設定場景切換的特效
-        //TransitionFade *pageTurn = TransitionFade::create(1.0F, GameScene::createScene());
-        //Director::getInstance()->replaceScene(pageTurn);
-        Director::getInstance()->replaceScene(GameScene::createScene());
-        // 關閉聲音寫在這裡
+        if (_countingAct->getCurrentFrame() == 200)
+        {
+            this->unschedule(schedule_selector(StartScene::update));
+            SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("startscene.plist");
+            //  設定場景切換的特效
+            //TransitionFade *pageTurn = TransitionFade::create(1.0F, GameScene::createScene());
+            //Director::getInstance()->replaceScene(pageTurn);
+            Director::getInstance()->replaceScene(GameScene::createScene());
+            // 關閉聲音寫在這裡
+        }
+        
     }
 }
 
@@ -108,5 +123,7 @@ void  StartScene::onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent) /
     Point touchLoc = pTouch->getLocation();
     if (_startBtn->touchesEnded(touchLoc)) { // 進行場景的切換
         _bToGameScene = true;
+        _countingDown->setVisible(true);
+        _countingAct->gotoFrameAndPlay(0, 200, false);
     }
 }

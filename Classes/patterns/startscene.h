@@ -28,4 +28,8 @@ private:
     CScoring* _rank;
     bool _bToGameScene;
 
+    Node* _countingDown;
+
+    cocostudio::timeline::ActionTimeline* _countingAct;
+
 };
