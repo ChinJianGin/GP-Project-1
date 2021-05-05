@@ -20,7 +20,23 @@ public:
 		_jump = AudioEngine::play2d("./scene101/music/thinking cloud.mp3", false);
 		AudioEngine::setVolume(_ibgMusic, 1.0f);
 	}
-	~audioController();
-
-
+	~audioController()
+	{
+		AudioEngine::end();
+	}
+	AudioEngine::AudioState getAudioState()
+	{
+		return AudioEngine::getState(_ibgMusic);
+	}
+	void setAudioState()
+	{
+		if (getAudioState() == AudioEngine::AudioState::PLAYING)
+		{
+			AudioEngine::pause(_ibgMusic);
+		}
+		else
+		{
+			AudioEngine::resume(_ibgMusic);
+		}
+	}
 };

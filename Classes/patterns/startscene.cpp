@@ -99,6 +99,7 @@ void StartScene::update(float dt)
             //Director::getInstance()->replaceScene(pageTurn);
             Director::getInstance()->replaceScene(GameScene::createScene());
             // 關閉聲音寫在這裡
+
         }
         
     }

@@ -90,6 +90,12 @@
     <ClCompile Include="..\Classes\midwork\calhit.cpp">
       <Filter>src\midwork</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CSpeedEnemy.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\midwork\CTallerEnemy.cpp">
+      <Filter>src\midwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
