@@ -21,6 +21,7 @@ public:
 	int doJump();
 	int doRoll();
 	int doJumpHigh();
+	int doSpawn();
 	
 	CRunner::_playerState getNowState();
 

@@ -27,8 +27,6 @@ public:
     virtual bool init();
     void update(float dt);
 
-    void resetMiddle(int n); // 重新產生前景 n 中物件的位置與狀態
-
     // 多點觸控處理
     void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event);
     void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event);
@@ -45,18 +43,19 @@ private:
     bool _bToStartScene, _bBoyRun, _bBoyJump, _watsonRoll, _resetJump, _resetRoll;
     int _irunid, _ijumpid, _irollid;
     int _actionID;
+    bool _doOnce;
+    float _addSpeed;
     float _chargeTime;
     float _timer1,_timer2;
 
     // 角色的控制
     cocos2d::Node* _boyRoot;
+
     cocostudio::timeline::ActionTimeline* _boyAction;
 
     CMiddleObject * _midobj;
 
     CRunner* _watsonRunner;
-
-    CEnemy* _normalEnemy;
 
     CScoring* _score;
 

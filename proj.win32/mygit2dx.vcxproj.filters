@@ -96,6 +96,9 @@
     <ClCompile Include="..\Classes\midwork\CTallerEnemy.cpp">
       <Filter>src\midwork</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\common\CGlobalVariables.cpp">
+      <Filter>src\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\midwork\calHit.h">
       <Filter>src\midwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\common\CGlobalVariables.h">
+      <Filter>src\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

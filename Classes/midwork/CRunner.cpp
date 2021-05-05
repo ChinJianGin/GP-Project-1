@@ -203,6 +203,11 @@ int CRunner::doJumpHigh()
 	return 4;
 }
 
+int CRunner::doSpawn()
+{
+	return 5;
+}
+
 Rect CRunner::getRect()
 {
 	return _characterRect;

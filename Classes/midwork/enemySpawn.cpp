@@ -29,7 +29,7 @@ void enemySpawn::update(float dt)
 	if (pt0.x >= 0 && _enemieson[0] == 1)
 	{
 		//log("burn");
-		_enemies[0]->doJump();
+		_enemies[0]->doSpawn();
 		_enemieson[0]++;
 	}
 	if (pt0.x >= 160 && _enemieson[0] == 2)
@@ -48,7 +48,7 @@ void enemySpawn::update(float dt)
 	if (pt1.x >= 0 && _enemieson[1] == 1)
 	{
 		//log("burn");
-		_enemies[1]->doJump();
+		_enemies[1]->doSpawn();
 		_enemieson[1]++;
 	}
 	if (pt1.x >= 150 && _enemieson[1] == 2)
@@ -68,7 +68,7 @@ void enemySpawn::update(float dt)
 	if (pt2.x >= 0 && _enemieson[2] == 1)
 	{
 		//log("speed");
-		_enemies[2]->doJump();
+		_enemies[2]->doSpawn();
 		_enemieson[2]++;
 	}
 	if (pt2.x >= 20 && _enemieson[2] == 2)

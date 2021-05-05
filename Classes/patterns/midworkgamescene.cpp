@@ -18,14 +18,14 @@ GameScene::GameScene()
 	_boyRoot = nullptr;
 	_irunid = _ijumpid = _irollid =-1;
 	_watsonRunner = nullptr;
-	_normalEnemy = nullptr;
-	_score = nullptr;
 	_healthbar_1 = nullptr;
 	_audio = nullptr;
 	_enemycontroller = nullptr;
 	_isHit = nullptr;
+	_doOnce = false;
 	_actionID = 0;
 	_chargeTime = _timer1 = _timer2 = 0.0f;
+	_addSpeed = 1.0f;
 }
 
 GameScene::~GameScene()
@@ -106,7 +106,7 @@ bool GameScene::init()
 	//暫存
 	_whichbtn = new (std::nothrow) CButton();
 
-	// 加入跑步小男生
+	
 	_boyRoot = CSLoader::createNode("boyrunning.csb"); //讀入節點(node)資料
 	loctag = dynamic_cast<cocos2d::Sprite*>(rootNode->getChildByName("boyrun"));
 	
@@ -116,9 +116,6 @@ bool GameScene::init()
 	_watsonRunner = new CRunner();
 	_watsonRunner->characterInit(*loctag, *this);
 	_watsonRunner->doRun();
-
-	/*_normalEnemy = new normalEnemy();
-	_normalEnemy->characterInit(*loctag, *this);*/
 
 	_enemycontroller = new enemySpawn();
 	_enemycontroller->init(*loctag, *this);
@@ -140,11 +137,6 @@ bool GameScene::init()
 	_midobj = new (std::nothrow) CMiddleObject();
 	_midobj->init("road00.png", "midobj.csb", *this, loctag->getPosition());
 
-
-	
-
-
-
     //創建支援多點觸控的事件聆聽器
     auto listener = EventListenerTouchAllAtOnce::create();;
 	listener->onTouchesBegan = CC_CALLBACK_2(GameScene::onTouchesBegan, this);
@@ -158,18 +150,26 @@ bool GameScene::init()
     return true;
 }
 
-void GameScene::resetMiddle(int n) // 重新產生前景1 中物件的位置與狀態
-{
-
-
-}
-
 
 void GameScene::update(float dt)
 {
-	// 每秒前景往左移動 MOVESPEED 個PIXEL
-	_midobj->update(dt);
-	_enemycontroller->update(dt);
+	// 每秒前景往左移動 MOVESPEED 個PIXEL	
+	
+	if ( _addSpeed == 1)
+	{
+		_midobj->update(dt);
+		_enemycontroller->update(dt);
+	}
+	else
+	{
+		_midobj->update(dt + (_addSpeed / 1000));
+		_enemycontroller->update(dt + (_addSpeed / 700));
+		
+	}
+	if (_score->getNowScore() / 10 == _addSpeed)_addSpeed++;
+	
+	
+	
 	_watsonRunner->update(dt, _boypt, _actionID, *_whichbtn);
 	_isHit->update(dt, _actionID);
 	//log("%f",_watsonRunner->getRoot()->getPosition().y);   //////Debug
@@ -214,7 +214,6 @@ void GameScene::update(float dt)
 	if (_bToStartScene) {
 		// 先將這個 SCENE 的 update從 schedule update 中移出
 		this->unschedule(schedule_selector(GameScene::update)); 
-		//_boyAction->stop(); // 停止跑步小男生的動畫撥放
 		SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("gamescene.plist");
 		TransitionFade* pageTurn = TransitionFade::create(1.0F, StartScene::createScene());
 		Director::getInstance()->replaceScene(pageTurn);
@@ -260,7 +259,6 @@ void GameScene::onTouchesMoved(const std::vector<Touch*>& touches, Event* event)
 		auto touch = item;
 		auto touchLoc = touch->getLocation();
 		int  touchId = touch->getID();
-
 		auto PreLoc = touchMap.at(touchId);	// 查詢這個ID 前一個觸控點的座標
 		touchMap.erase(touchId);			// 刪除這個 ID 在 MAP 中的內容
 		touchMap.insert(std::unordered_map<int, Vec2>::value_type(touchId, touchLoc));  // 將目前這個新的加入
@@ -286,7 +284,6 @@ void GameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event* event)
 		int  touchId = touch->getID();
 		auto PreLoc = touchMap.at(touchId);	// 查詢這個 ID 前一個觸控點的座標
 		touchMap.erase(touchId);			// 刪除這個 ID 在 MAP 中的內容
-
 		if ((_ijumpid == touchId) && _bBoyJump) { // 這個 touch 點之前是點在 runbtn 上
 			_jumpbtn->touchesEnded(touchLoc);
 			_bBoyJump = false;
@@ -329,6 +326,7 @@ void GameScene::_reset()
 	_bBoyJump = _bBoyRun = _bToStartScene = _watsonRoll = _resetJump = _resetRoll = false;
 	_irunid = _ijumpid = _irollid = -1;
 	_actionID = 0;
+	_addSpeed = 0.0f;
 	_boypt = Point(0, 0);
 	_chargeTime = _timer1 = _timer2 = 0.0f;
 	_midobj->resetObj(0); _midobj->resetObj(1);

@@ -22,6 +22,8 @@ public:
 
 	int doJumpHigh();
 
+	int doSpawn();
+
 	CEnemy::LV getDifficulty();
 };
 

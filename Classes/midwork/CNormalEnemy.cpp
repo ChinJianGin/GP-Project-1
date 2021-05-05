@@ -7,9 +7,9 @@ void normalEnemy::characterInit(Sprite& loctag, Node& theScene)
 	_characterRoot = CSLoader::createNode("normalenemy-2.csb");
 	theScene.addChild(_characterRoot, 5);
 
-	_characterJumpAct = CSLoader::createTimeline("normalenemy-2.csb");
-	_characterJumpAct->setTimeSpeed(1.0f);
-	_characterRoot->runAction(_characterJumpAct);
+	_characterSpawn = CSLoader::createTimeline("normalenemy-2.csb");
+	_characterSpawn->setTimeSpeed(1.0f);
+	_characterRoot->runAction(_characterSpawn);
 
 	_characterRunAct = CSLoader::createTimeline("normalenemy-2.csb");
 	_characterRunAct->setTimeSpeed(1.0f);
@@ -24,10 +24,15 @@ int normalEnemy::doRun()
 	return 1;
 }
 
-int normalEnemy::doJump()
+int normalEnemy::doSpawn()
 {
 	_characterRunAct->pause();
-	_characterJumpAct->gotoFrameAndPlay(60, 108, false);
+	_characterSpawn->gotoFrameAndPlay(60, 108, false);
+	return 5;
+}
+
+int normalEnemy::doJump()
+{
 	return 2;
 }
 
