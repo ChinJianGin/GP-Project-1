@@ -112,3 +112,8 @@ int CScoring::gethisscore()
 {
 	return _hisScore[0];
 }
+
+void CScoring::singleDelete()
+{
+	delete _singleScore;
+}

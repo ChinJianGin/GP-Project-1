@@ -12,7 +12,7 @@ enemySpawn::enemySpawn()
 {
 	genLoc[0] = Point(-240, 124); genLoc[1] = Point(-640, 124); genLoc[2] = Point(-1040, 124);
 	_enemies[0] = _enemies[1] = _enemies[2] = nullptr;
-	_enemieson[0] = _enemieson[1] = _enemieson[2] = 1;
+	_enemieson[0] = _enemieson[1] = _enemieson[2] = 1;	
 }
 
 enemySpawn::~enemySpawn()
@@ -107,6 +107,7 @@ void enemySpawn::init(Sprite& loctag, Node& parent)
 
 void enemySpawn::resetEnemies(int itype)
 {
+	
 	if (itype == 0)
 	{
 		_enemieson[0] = 1;

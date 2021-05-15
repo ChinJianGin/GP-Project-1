@@ -69,6 +69,7 @@ AppDelegate::~AppDelegate()
 #elif USE_SIMPLE_AUDIO_ENGINE
     SimpleAudioEngine::end();
 #endif
+    CScoring::singleDelete();
 }
 
 // if you want a different context, modify the value of glContextAttrs

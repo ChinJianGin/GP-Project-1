@@ -22,6 +22,8 @@ public:
 	void resetScore();
 	void setScore(CEnemy& theEnemy);
 
+	static void singleDelete();
+
 	int getNowScore();
 	bool bigTosmall(int i, int j);
 
